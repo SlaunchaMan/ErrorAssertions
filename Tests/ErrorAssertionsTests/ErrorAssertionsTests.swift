@@ -24,6 +24,14 @@ final class ErrorAssertionsTests: XCTestCase {
         expectedError: AnonymousError.withMessage("test")) { 
             ErrorAssertions.assert(false, "test")
         }
+        
+        expectAssertionFailure {
+            ErrorAssertions.assert(false)
+        }
+        
+        expectAssertionFailure(expectedMessage: "test") {
+            ErrorAssertions.assert(false, "test")
+        }
     }
     
     func testPrecondition() {
@@ -43,6 +51,14 @@ final class ErrorAssertionsTests: XCTestCase {
         expectedError: AnonymousError.withMessage("test")) { 
             ErrorAssertions.precondition(false, "test")
         }
+        
+        expectPreconditionFailure {
+            ErrorAssertions.precondition(false)
+        }
+        
+        expectPreconditionFailure(expectedMessage: "test") { 
+            ErrorAssertions.precondition(false, "test")
+        }
     }
     
     func testFatalError() {
@@ -59,6 +75,14 @@ final class ErrorAssertionsTests: XCTestCase {
         }
         
         expectFatalError(expectedError: AnonymousError.withMessage("test")) { 
+            ErrorAssertions.fatalError("test")
+        }
+
+        expectFatalError {
+            ErrorAssertions.fatalError()
+        }
+        
+        expectFatalError(expectedMessage: "test") {
             ErrorAssertions.fatalError("test")
         }
     }

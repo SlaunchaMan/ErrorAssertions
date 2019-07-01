@@ -65,7 +65,7 @@ extension XCTestCase {
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
     ///   - testcase: The closure to run that produces the error.
-    func expectAssertionFailure<T: Error>(
+    public func expectAssertionFailure<T: Error>(
         expectedError: T,
         timeout: TimeInterval = 2,
         file: StaticString = #file,

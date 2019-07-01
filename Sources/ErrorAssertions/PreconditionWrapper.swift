@@ -67,11 +67,12 @@ extension XCTestCase {
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
     ///   - testcase: The closure to run that produces the error.
-    func expectPreconditionFailure<T: Error>(expectedError: T,
-                                             timeout: TimeInterval = 2,
-                                             file: StaticString = #file,
-                                             line: UInt = #line,
-                                             testcase: @escaping () -> Void)
+    public func expectPreconditionFailure<T: Error>(
+        expectedError: T,
+        timeout: TimeInterval = 2,
+        file: StaticString = #file,
+        line: UInt = #line,
+        testcase: @escaping () -> Void)
         where T: Equatable {
             let expectation = self
                 .expectation(description: "expectingPrecondition")

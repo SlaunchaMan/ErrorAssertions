@@ -63,7 +63,7 @@ extension XCTestCase {
     ///   - line: The line number in `file` where this is called.
     ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
-    func expectFatalError<T: Error>(
+    public func expectFatalError<T: Error>(
         expectedError: T,
         timeout: TimeInterval = 2,
         file: StaticString = #file,

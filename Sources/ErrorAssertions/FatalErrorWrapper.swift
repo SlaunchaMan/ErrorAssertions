@@ -80,7 +80,7 @@ extension XCTestCase {
             FatalErrorUtilities.replaceFatalError { error, _, _ in
                 assertionError = error as? T
                 expectation.fulfill()
-                self.unreachable()
+                unreachable()
             }
             
             queue().async(execute: testcase)
@@ -143,7 +143,7 @@ extension XCTestCase {
         
         FatalErrorUtilities.replaceFatalError { error, _, _ in
             expectation.fulfill()
-            self.unreachable()
+            unreachable()
         }
         
         queue().async(execute: testcase)
@@ -151,12 +151,6 @@ extension XCTestCase {
         waitForExpectations(timeout: timeout) { _ in
             FatalErrorUtilities.restoreFatalError()
         }
-    }
-    
-    private func unreachable() -> Never {
-        repeat {
-            RunLoop.current.run()
-        } while (true)
     }
     
 }

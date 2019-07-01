@@ -66,12 +66,14 @@ extension XCTestCase {
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
+    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectPreconditionFailure<T: Error>(
         expectedError: T,
         timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
+        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void)
         where T: Equatable {
             let expectation = self
@@ -83,9 +85,10 @@ extension XCTestCase {
                 condition, error, _, _ in
                 preconditionError = error as? T
                 expectation.fulfill()
+                if !condition { unreachable() }
             }
             
-            testcase()
+            queue().async(execute: testcase)
             
             waitForExpectations(timeout: timeout) { _ in
                 XCTAssertEqual(preconditionError,
@@ -108,12 +111,16 @@ extension XCTestCase {
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
+    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
-    public func expectPreconditionFailure(expectedMessage message: String,
-                                          timeout: TimeInterval = 2,
-                                          file: StaticString = #file,
-                                          line: UInt = #line,
-                                          testcase: @escaping () -> Void) {
+    public func expectPreconditionFailure(
+        expectedMessage message: String,
+        timeout: TimeInterval = 2,
+        file: StaticString = #file,
+        line: UInt = #line,
+        queue: @autoclosure () -> DispatchQueue = .global(),
+        testcase: @escaping () -> Void
+        ) {
         expectPreconditionFailure(
             expectedError: AnonymousError(string: message),
             timeout: timeout,
@@ -121,7 +128,7 @@ extension XCTestCase {
             line: line,
             testcase: testcase)
     }
-
+    
     /// Executes the `testcase` closure and expects it to produce a
     /// precondition failure.
     ///
@@ -131,24 +138,29 @@ extension XCTestCase {
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
+    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
-    public func expectPreconditionFailure(timeout: TimeInterval = 2,
-                                          file: StaticString = #file,
-                                          line: UInt = #line,
-                                          testcase: @escaping () -> Void) {
-            let expectation = self
-                .expectation(description: "expectingPrecondition")
-            
-            PreconditionUtilities.replacePrecondition {
-                condition, error, _, _ in
-                expectation.fulfill()
-            }
-            
-            testcase()
-            
-            waitForExpectations(timeout: timeout) { _ in
-                PreconditionUtilities.restorePrecondition()
-            }
+    public func expectPreconditionFailure(
+        timeout: TimeInterval = 2,
+        file: StaticString = #file,
+        line: UInt = #line,
+        queue: @autoclosure () -> DispatchQueue = .global(),
+        testcase: @escaping () -> Void
+        ) {
+        let expectation = self
+            .expectation(description: "expectingPrecondition")
+        
+        PreconditionUtilities.replacePrecondition {
+            condition, error, _, _ in
+            expectation.fulfill()
+            if !condition { unreachable() }
+        }
+        
+        queue().async(execute: testcase)
+        
+        waitForExpectations(timeout: timeout) { _ in
+            PreconditionUtilities.restorePrecondition()
+        }
     }
     
 }

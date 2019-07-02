@@ -7,7 +7,8 @@
 
 import XCTest
 
-@testable import ErrorAssertions
+import ErrorAssertions
+import ErrorAssertionExpectations
 
 final class AssertTests: XCTestCase {
     

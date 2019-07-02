@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ErrorAssertions"
-               BuildableName = "ErrorAssertions"
-               BlueprintName = "ErrorAssertions"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ErrorAssertionsTests"
-               BuildableName = "ErrorAssertionsTests"
-               BlueprintName = "ErrorAssertionsTests"
+               BlueprintIdentifier = "ErrorAssertionExpectations"
+               BuildableName = "ErrorAssertionExpectations"
+               BlueprintName = "ErrorAssertionExpectations"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,20 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ErrorAssertionsTests"
-               BuildableName = "ErrorAssertionsTests"
-               BlueprintName = "ErrorAssertionsTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -76,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ErrorAssertions"
-            BuildableName = "ErrorAssertions"
-            BlueprintName = "ErrorAssertions"
+            BlueprintIdentifier = "ErrorAssertionExpectations"
+            BuildableName = "ErrorAssertionExpectations"
+            BlueprintName = "ErrorAssertionExpectations"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

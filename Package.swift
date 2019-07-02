@@ -5,10 +5,21 @@ let package = Package(
     name: "ErrorAssertions",
     products: [
         .library(name: "ErrorAssertions", targets: ["ErrorAssertions"]),
+        .library(name: "ErrorAssertionExpectations",
+                 targets: [
+                    "ErrorAssertionExpectations",
+            ]),
     ],
     targets: [
         .target(name: "ErrorAssertions", dependencies: []),
+        .target(name: "ErrorAssertionExpectations",
+                dependencies: [
+                    "ErrorAssertions",
+            ]),
         .testTarget(name: "ErrorAssertionsTests",
-                    dependencies: ["ErrorAssertions"]),
+                    dependencies: [
+                        "ErrorAssertions",
+                        "ErrorAssertionExpectations",
+            ]),
     ]
 )

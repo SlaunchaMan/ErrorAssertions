@@ -1,6 +1,6 @@
 //
 //  Unreachable.swift
-//  ErrorAssertions
+//  ErrorAssertionExpectations
 //
 //  Created by Jeff Kelley on 7/1/19.
 //

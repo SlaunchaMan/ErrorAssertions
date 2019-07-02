@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum AnonymousError: Error, Equatable, LocalizedError {
+public enum AnonymousError: Error, Equatable, LocalizedError {
     case blank
     case withMessage(String)
     
-    init(string: String) {
+    public init(string: String) {
         self = string.isEmpty ? .blank : .withMessage(string)
     }
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .blank: return nil
         case .withMessage(let message): return message

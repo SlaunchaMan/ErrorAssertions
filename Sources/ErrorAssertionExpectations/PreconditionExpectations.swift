@@ -32,8 +32,8 @@ extension XCTestCase {
         queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void)
         where T: Equatable {
-            let expectation = self
-                .expectation(description: "expectingPrecondition")
+            let expectation = self.expectation(
+                description: "expectingPrecondition_\(file):\(line)")
             
             var preconditionError: T? = nil
             
@@ -103,8 +103,8 @@ extension XCTestCase {
         queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void
         ) {
-        let expectation = self
-            .expectation(description: "expectingPrecondition")
+        let expectation = self.expectation(
+            description: "expectingPrecondition_\(file):\(line)")
         
         PreconditionUtilities.replacePrecondition {
             condition, error, _, _ in

@@ -33,7 +33,7 @@ extension XCTestCase {
         testcase: @escaping () -> Void)
         where T: Equatable {
             let expectation = self
-                .expectation(description: "expectingFatalError")
+                .expectation(description: "expectingFatalError_\(file):\(line)")
             
             var assertionError: T? = nil
             
@@ -94,12 +94,13 @@ extension XCTestCase {
     ///   - testcase: The closure to run that produces the error.
     public func expectFatalError(
         timeout: TimeInterval = 10,
+        in context: StaticString = #function,
         file: StaticString = #file,
         line: UInt = #line,
         queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void) {
         let expectation = self
-            .expectation(description: "expectingPrecondition")
+            .expectation(description: "expectingFatalError_\(file):\(line)")
         
         FatalErrorUtilities.replaceFatalError { error, _, _ in
             expectation.fulfill()

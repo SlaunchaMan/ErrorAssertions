@@ -32,7 +32,8 @@ extension XCTestCase {
         queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void
         ) where T: Equatable {
-        let expectation = self.expectation(description: "expectingAssert")
+        let expectation = self
+            .expectation(description: "expectingAssert_\(file):\(line)")
         var assertionError: T? = nil
         
         AssertUtilities.replaceAssert { condition, error, _, _ in
@@ -101,7 +102,7 @@ extension XCTestCase {
         testcase: @escaping () -> Void
         ) {
         let expectation = self
-            .expectation(description: "expectingAssertion")
+            .expectation(description: "expectingAssert_\(file):\(line)")
         
         AssertUtilities.replaceAssert {
             condition, error, _, _ in

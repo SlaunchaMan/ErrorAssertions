@@ -39,9 +39,11 @@ extension XCTestCase {
             
             PreconditionUtilities.replacePrecondition {
                 condition, error, _, _ in
-                preconditionError = error as? T
-                expectation.fulfill()
-                if !condition { unreachable() }
+                if !condition {
+                    preconditionError = error as? T
+                    expectation.fulfill()
+                    unreachable()
+                }
             }
             
             queue().async(execute: testcase)
@@ -107,9 +109,11 @@ extension XCTestCase {
             description: "expectingPrecondition_\(file):\(line)")
         
         PreconditionUtilities.replacePrecondition {
-            condition, error, _, _ in
-            expectation.fulfill()
-            if !condition { unreachable() }
+            condition, _, _, _ in
+            if !condition {
+                expectation.fulfill()
+                unreachable()
+            }
         }
         
         queue().async(execute: testcase)

@@ -37,9 +37,11 @@ extension XCTestCase {
         var assertionError: T? = nil
         
         AssertUtilities.replaceAssert { condition, error, _, _ in
-            assertionError = error as? T
-            expectation.fulfill()
-            if !condition { unreachable() }
+            if !condition {
+                assertionError = error as? T
+                expectation.fulfill()
+                unreachable()
+            }
         }
         
         queue().async(execute: testcase)
@@ -105,9 +107,11 @@ extension XCTestCase {
             .expectation(description: "expectingAssert_\(file):\(line)")
         
         AssertUtilities.replaceAssert {
-            condition, error, _, _ in
-            expectation.fulfill()
-            if !condition { unreachable() }
+            condition, _, _, _ in
+            if !condition {
+                expectation.fulfill()
+                unreachable()
+            }
         }
         
         queue().async(execute: testcase)

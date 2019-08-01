@@ -5,6 +5,7 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
+#if DEBUG
 public func fatalError(_ error: Error,
                        file: StaticString = #file,
                        line: UInt = #line) -> Never {
@@ -32,7 +33,6 @@ public struct FatalErrorUtilities {
                          line: line)
     }
     
-    #if DEBUG
     static public func replaceFatalError(
         closure: @escaping FatalErrorClosure
         ) {
@@ -42,6 +42,6 @@ public struct FatalErrorUtilities {
     static public func restoreFatalError() {
         fatalErrorClosure = defaultFatalErrorClosure
     }
-    #endif
     
 }
+#endif

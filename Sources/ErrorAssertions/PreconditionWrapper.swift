@@ -5,6 +5,7 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
+#if DEBUG
 public func precondition(_ condition: @autoclosure () -> Bool,
                          error: Error,
                          file: StaticString = #file,
@@ -57,7 +58,6 @@ public struct PreconditionUtilities {
                            line: line)
     }
     
-    #if DEBUG
     private static let defaultPreconditionFailureClosure = {
         (error: Error, file: StaticString, line: UInt) in
         Swift.preconditionFailure(error.localizedDescription,
@@ -74,7 +74,6 @@ public struct PreconditionUtilities {
     static public func restorePrecondition() {
         preconditionClosure = defaultPreconditionClosure
     }
-    #endif
     
     static public func replacePreconditionFailure(
         closure: @escaping PreconditionFailureClosure
@@ -88,3 +87,4 @@ public struct PreconditionUtilities {
     }
     
 }
+#endif

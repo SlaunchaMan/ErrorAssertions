@@ -5,6 +5,7 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
+#if DEBUG
 public func assert(_ condition: @autoclosure () -> Bool,
                    error: Error,
                    file: StaticString = #file,
@@ -54,7 +55,6 @@ public struct AssertUtilities {
                      line: line)
     }
     
-    #if DEBUG
     private static let defaultAssertionFailureClosure = {
         (error: Error, file: StaticString, line: UInt) in
         Swift.assertionFailure(error.localizedDescription,
@@ -69,7 +69,6 @@ public struct AssertUtilities {
     static public func restoreAssert() {
         assertClosure = AssertUtilities.defaultAssertClosure
     }
-    #endif
     
     static public func replaceAssertionFailure(
         closure: @escaping AssertionFailureClosure
@@ -82,3 +81,4 @@ public struct AssertUtilities {
     }
     
 }
+#endif

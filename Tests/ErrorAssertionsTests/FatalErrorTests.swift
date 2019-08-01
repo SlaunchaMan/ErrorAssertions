@@ -23,7 +23,7 @@ final class FatalErrorTests: XCTestCase {
     
     func testDefaultErrorIsABlankAnonymousError() {
         expectFatalError(expectedError: AnonymousError.blank) { 
-            ErrorAssertions.fatalError()
+            fatalError()
         }
     }
     
@@ -31,19 +31,19 @@ final class FatalErrorTests: XCTestCase {
         let expectedError = AnonymousError.withMessage("test")
         
         expectFatalError(expectedError: expectedError) { 
-            ErrorAssertions.fatalError("test")
+            fatalError("test")
         }
     }
     
     func testFatalErrorWithoutCapturingError() {
         expectFatalError {
-            ErrorAssertions.fatalError()
+            fatalError()
         }
     }
     
     func testFatalErrorWithMessageWithoutCapturingError() {
         expectFatalError(expectedMessage: "test") {
-            ErrorAssertions.fatalError("test")
+            fatalError("test")
         }
     }
     

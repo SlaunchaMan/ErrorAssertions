@@ -19,11 +19,23 @@ final class PreconditionTests: XCTestCase {
         expectPreconditionFailure(expectedError: TestError.testErrorB) { 
             precondition(false, error: TestError.testErrorB)
         }
+
+        expectPreconditionFailure(expectedError: TestError.testErrorA) { 
+            preconditionFailure(error: TestError.testErrorA)
+        }
+        
+        expectPreconditionFailure(expectedError: TestError.testErrorB) { 
+            preconditionFailure(error: TestError.testErrorB)
+        }
     }
     
     func testDefaultErrorIsABlankAnonymousError() {
         expectPreconditionFailure(expectedError: AnonymousError.blank) { 
-            ErrorAssertions.precondition(false)
+            precondition(false)
+        }
+
+        expectPreconditionFailure(expectedError: AnonymousError.blank) { 
+            preconditionFailure()
         }
     }
     
@@ -31,19 +43,31 @@ final class PreconditionTests: XCTestCase {
         let expectedError = AnonymousError.withMessage("test")
         
         expectPreconditionFailure(expectedError: expectedError) { 
-            ErrorAssertions.precondition(false, "test")
+            precondition(false, "test")
+        }
+
+        expectPreconditionFailure(expectedError: expectedError) { 
+            preconditionFailure("test")
         }
     }
     
     func testPreconditionFailureWithoutCapturingError() {
         expectPreconditionFailure {
-            ErrorAssertions.precondition(false)
+            precondition(false)
+        }
+
+        expectPreconditionFailure {
+            preconditionFailure()
         }
     }
     
     func testPreconditionFailureWithMessageWithoutCapturingError() {
         expectPreconditionFailure(expectedMessage: "test") {
-            ErrorAssertions.precondition(false, "test")
+            precondition(false, "test")
+        }
+
+        expectPreconditionFailure(expectedMessage: "test") {
+            preconditionFailure("test")
         }
     }
     

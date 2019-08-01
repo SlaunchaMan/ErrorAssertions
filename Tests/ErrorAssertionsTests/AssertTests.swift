@@ -20,11 +20,23 @@ final class AssertTests: XCTestCase {
         expectAssertionFailure(expectedError: TestError.testErrorB) { 
             assert(false, error: TestError.testErrorB)
         }
+        
+        expectAssertionFailure(expectedError: TestError.testErrorA) {
+            assertionFailure(error: TestError.testErrorA)
+        }
+
+        expectAssertionFailure(expectedError: TestError.testErrorB) { 
+            assertionFailure(error: TestError.testErrorB)
+        }
     }
     
     func testDefaultErrorIsABlankAnonymousError() {
         expectAssertionFailure(expectedError: AnonymousError.blank) { 
-            ErrorAssertions.assert(false)
+            assert(false)
+        }
+
+        expectAssertionFailure(expectedError: AnonymousError.blank) { 
+            assertionFailure()
         }
     }
     
@@ -32,19 +44,32 @@ final class AssertTests: XCTestCase {
         let expectedError = AnonymousError.withMessage("test")
         
         expectAssertionFailure(expectedError: expectedError) { 
-            ErrorAssertions.assert(false, "test")
+            assert(false, "test")
+        }
+
+        expectAssertionFailure(expectedError: expectedError) { 
+            assertionFailure("test")
         }
     }
     
     func testAssertionFailureWithoutCapturingError() {
         expectAssertionFailure {
-            ErrorAssertions.assert(false)
+            assert(false)
         }
+        
+        expectAssertionFailure {
+            assertionFailure()
+        }
+
     }
     
     func testAssertionFailureWithMessageWithoutCapturingError() {
         expectAssertionFailure(expectedMessage: "test") {
-            ErrorAssertions.assert(false, "test")
+            assert(false, "test")
+        }
+
+        expectAssertionFailure(expectedMessage: "test") {
+            assertionFailure("test")
         }
     }
     

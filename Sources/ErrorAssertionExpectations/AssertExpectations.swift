@@ -42,6 +42,12 @@ extension XCTestCase {
             }
         }
         
+        AssertUtilities.replaceAssertionFailure { error, _, _ in
+            assertionError = error as? T
+            expectation.fulfill()
+            unreachable()
+        }
+        
         let thread = ClosureThread(testcase)
         thread.start()
         
@@ -52,6 +58,7 @@ extension XCTestCase {
                            line: line)
             
             AssertUtilities.restoreAssert()
+            AssertUtilities.restoreAssertionFailure()
             
             thread.cancel()
         }
@@ -110,11 +117,17 @@ extension XCTestCase {
             }
         }
         
+        AssertUtilities.replaceAssertionFailure { _, _, _ in
+            expectation.fulfill()
+            unreachable()
+        }
+        
         let thread = ClosureThread(testcase)
         thread.start()
         
         waitForExpectations(timeout: timeout) { _ in
             AssertUtilities.restoreAssert()
+            AssertUtilities.restoreAssertionFailure()
             
             thread.cancel()
         }

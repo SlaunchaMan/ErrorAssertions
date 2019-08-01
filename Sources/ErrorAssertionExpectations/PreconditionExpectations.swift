@@ -44,6 +44,13 @@ extension XCTestCase {
                 }
             }
             
+            PreconditionUtilities.replacePreconditionFailure {
+                error, _, _ -> Never in
+                preconditionError = error as? T
+                expectation.fulfill()
+                unreachable()
+            }
+            
             let thread = ClosureThread(testcase)
             thread.start()
             
@@ -54,6 +61,7 @@ extension XCTestCase {
                                line: line)
                 
                 PreconditionUtilities.restorePrecondition()
+                PreconditionUtilities.restorePreconditionFailure()
                 
                 thread.cancel()
             }
@@ -114,11 +122,17 @@ extension XCTestCase {
             }
         }
         
+        PreconditionUtilities.replacePreconditionFailure { _, _, _ -> Never in
+            expectation.fulfill()
+            unreachable()
+        }
+        
         let thread = ClosureThread(testcase)
         thread.start()
         
         waitForExpectations(timeout: timeout) { _ in
             PreconditionUtilities.restorePrecondition()
+            PreconditionUtilities.restorePreconditionFailure()
             thread.cancel()
         }
     }

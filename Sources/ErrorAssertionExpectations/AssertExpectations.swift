@@ -29,7 +29,7 @@ extension XCTestCase {
         file: StaticString = #file,
         line: UInt = #line,
         testcase: @escaping () -> Void
-        ) where T: Equatable {
+    ) where T: Equatable {
         let expectation = self
             .expectation(description: "expectingAssert_\(file):\(line)")
         var assertionError: T? = nil
@@ -82,7 +82,7 @@ extension XCTestCase {
         file: StaticString = #file,
         line: UInt = #line,
         testcase: @escaping () -> Void
-        ) {
+    ) {
         expectAssertionFailure(
             expectedError: AnonymousError(string: message),
             timeout: timeout,
@@ -106,7 +106,7 @@ extension XCTestCase {
         file: StaticString = #file,
         line: UInt = #line,
         testcase: @escaping () -> Void
-        ) {
+    ) {
         let expectation = self
             .expectation(description: "expectingAssert_\(file):\(line)")
         

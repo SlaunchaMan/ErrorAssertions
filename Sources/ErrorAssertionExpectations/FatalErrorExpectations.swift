@@ -28,32 +28,32 @@ extension XCTestCase {
         timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        testcase: @escaping () -> Void)
-        where T: Equatable {
-            let expectation = self
-                .expectation(description: "expectingFatalError_\(file):\(line)")
+        testcase: @escaping () -> Void
+    ) where T: Equatable {
+        let expectation = self
+            .expectation(description: "expectingFatalError_\(file):\(line)")
+        
+        var fatalError: T? = nil
+        
+        FatalErrorUtilities.replaceFatalError { error, _, _ in
+            fatalError = error as? T
+            expectation.fulfill()
+            unreachable()
+        }
+        
+        let thread = ClosureThread(testcase)
+        thread.start()
+        
+        waitForExpectations(timeout: timeout) { _ in
+            XCTAssertEqual(fatalError,
+                           expectedError,
+                           file: file,
+                           line: line)
             
-            var fatalError: T? = nil
+            FatalErrorUtilities.restoreFatalError()
             
-            FatalErrorUtilities.replaceFatalError { error, _, _ in
-                fatalError = error as? T
-                expectation.fulfill()
-                unreachable()
-            }
-            
-            let thread = ClosureThread(testcase)
-            thread.start()
-            
-            waitForExpectations(timeout: timeout) { _ in
-                XCTAssertEqual(fatalError,
-                               expectedError,
-                               file: file,
-                               line: line)
-                
-                FatalErrorUtilities.restoreFatalError()
-                
-                thread.cancel()
-            }
+            thread.cancel()
+        }
     }
     
     /// Executes the `testcase` closure and expects it to produce a specific
@@ -73,7 +73,8 @@ extension XCTestCase {
         timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        testcase: @escaping () -> Void) {
+        testcase: @escaping () -> Void
+    ) {
         expectFatalError(expectedError: AnonymousError(string: message),
                          timeout: timeout,
                          file: file,
@@ -95,7 +96,8 @@ extension XCTestCase {
         in context: StaticString = #function,
         file: StaticString = #file,
         line: UInt = #line,
-        testcase: @escaping () -> Void) {
+        testcase: @escaping () -> Void
+    ) {
         let expectation = self
             .expectation(description: "expectingFatalError_\(file):\(line)")
         

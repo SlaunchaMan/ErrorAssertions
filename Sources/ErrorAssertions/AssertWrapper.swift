@@ -40,7 +40,9 @@ public func assertionFailure(_ message: @autoclosure () -> String = String(),
 public struct AssertUtilities {
     
     public typealias AssertClosure = (Bool, Error, StaticString, UInt) -> ()
-    public typealias AssertionFailureClosure = (Error, StaticString, UInt) -> ()
+    
+    public typealias AssertionFailureClosure =
+        (Error, StaticString, UInt) -> ()
     
     fileprivate static var assertClosure = defaultAssertClosure
     

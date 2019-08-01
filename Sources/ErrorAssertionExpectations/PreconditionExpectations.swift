@@ -28,44 +28,43 @@ extension XCTestCase {
         timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        testcase: @escaping () -> Void)
-        where T: Equatable {
-            let expectation = self.expectation(
-                description: "expectingPrecondition_\(file):\(line)")
-            
-            var preconditionError: T? = nil
-            
-            PreconditionUtilities.replacePrecondition {
-                condition, error, _, _ in
-                if !condition {
-                    preconditionError = error as? T
-                    expectation.fulfill()
-                    unreachable()
-                }
-            }
-            
-            PreconditionUtilities.replacePreconditionFailure {
-                error, _, _ -> Never in
+        testcase: @escaping () -> Void
+    ) where T: Equatable {
+        let expectation = self.expectation(
+            description: "expectingPrecondition_\(file):\(line)")
+        
+        var preconditionError: T? = nil
+        
+        PreconditionUtilities.replacePrecondition { condition, error, _, _ in
+            if !condition {
                 preconditionError = error as? T
                 expectation.fulfill()
                 unreachable()
             }
+        }
+        
+        PreconditionUtilities.replacePreconditionFailure {
+            error, _, _ -> Never in
+            preconditionError = error as? T
+            expectation.fulfill()
+            unreachable()
+        }
+        
+        let thread = ClosureThread(testcase)
+        thread.start()
+        
+        waitForExpectations(timeout: timeout) { _ in
+            XCTAssertEqual(preconditionError,
+                           expectedError,
+                           file: file,
+                           line: line)
             
-            let thread = ClosureThread(testcase)
-            thread.start()
+            PreconditionUtilities.restorePrecondition()
+            PreconditionUtilities.restorePreconditionFailure()
             
-            waitForExpectations(timeout: timeout) { _ in
-                XCTAssertEqual(preconditionError,
-                               expectedError,
-                               file: file,
-                               line: line)
-                
-                PreconditionUtilities.restorePrecondition()
-                PreconditionUtilities.restorePreconditionFailure()
-                
-                thread.cancel()
-            }
-            
+            thread.cancel()
+        }
+        
     }
     
     /// Executes the `testcase` closure and expects it to produce a specific

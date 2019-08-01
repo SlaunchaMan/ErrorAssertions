@@ -18,18 +18,16 @@ extension XCTestCase {
     ///   - expectedError: The `Error` you expect `testcase` to pass to
     ///                    `precondition()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectPreconditionFailure<T: Error>(
         expectedError: T,
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void)
         where T: Equatable {
             let expectation = self.expectation(
@@ -46,7 +44,8 @@ extension XCTestCase {
                 }
             }
             
-            queue().async(execute: testcase)
+            let thread = ClosureThread(testcase)
+            thread.start()
             
             waitForExpectations(timeout: timeout) { _ in
                 XCTAssertEqual(preconditionError,
@@ -55,7 +54,10 @@ extension XCTestCase {
                                line: line)
                 
                 PreconditionUtilities.restorePrecondition()
+                
+                thread.cancel()
             }
+            
     }
     
     /// Executes the `testcase` closure and expects it to produce a specific
@@ -65,20 +67,18 @@ extension XCTestCase {
     ///   - message: The `String` you expect `testcase` to pass to
     ///              `precondition()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectPreconditionFailure(
         expectedMessage message: String,
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void
-        ) {
+    ) {
         expectPreconditionFailure(
             expectedError: AnonymousError(string: message),
             timeout: timeout,
@@ -92,19 +92,17 @@ extension XCTestCase {
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectPreconditionFailure(
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void
-        ) {
+    ) {
         let expectation = self.expectation(
             description: "expectingPrecondition_\(file):\(line)")
         
@@ -116,10 +114,12 @@ extension XCTestCase {
             }
         }
         
-        queue().async(execute: testcase)
+        let thread = ClosureThread(testcase)
+        thread.start()
         
         waitForExpectations(timeout: timeout) { _ in
             PreconditionUtilities.restorePrecondition()
+            thread.cancel()
         }
     }
     

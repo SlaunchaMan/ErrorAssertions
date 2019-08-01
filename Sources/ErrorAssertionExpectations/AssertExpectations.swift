@@ -16,20 +16,18 @@ extension XCTestCase {
     ///
     /// - Parameters:
     ///   - expectedError: The `Error` you expect `testcase` to pass to
-    ///                    `assert()`.
+    ///                    `assert()` or `assertionFailure()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectAssertionFailure<T: Error>(
         expectedError: T,
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void
         ) where T: Equatable {
         let expectation = self
@@ -44,7 +42,8 @@ extension XCTestCase {
             }
         }
         
-        queue().async(execute: testcase)
+        let thread = ClosureThread(testcase)
+        thread.start()
         
         waitForExpectations(timeout: timeout) { _ in
             XCTAssertEqual(assertionError,
@@ -53,6 +52,8 @@ extension XCTestCase {
                            line: line)
             
             AssertUtilities.restoreAssert()
+            
+            thread.cancel()
         }
     }
     
@@ -63,18 +64,16 @@ extension XCTestCase {
     ///   - message: The `String` you expect `testcase` to pass to
     ///              `assert()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectAssertionFailure(
         expectedMessage message: String,
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void
         ) {
         expectAssertionFailure(
@@ -90,34 +89,34 @@ extension XCTestCase {
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectAssertionFailure(
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void
         ) {
         let expectation = self
             .expectation(description: "expectingAssert_\(file):\(line)")
         
-        AssertUtilities.replaceAssert {
-            condition, _, _, _ in
+        AssertUtilities.replaceAssert { condition, _, _, _ in
             if !condition {
                 expectation.fulfill()
                 unreachable()
             }
         }
         
-        queue().async(execute: testcase)
+        let thread = ClosureThread(testcase)
+        thread.start()
         
         waitForExpectations(timeout: timeout) { _ in
             AssertUtilities.restoreAssert()
+            
+            thread.cancel()
         }
     }
     

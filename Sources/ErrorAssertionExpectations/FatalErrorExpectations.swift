@@ -18,39 +18,41 @@ extension XCTestCase {
     ///   - expectedError: The `Error` you expect `testcase` to pass to
     ///                    `fatalError()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectFatalError<T: Error>(
         expectedError: T,
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void)
         where T: Equatable {
             let expectation = self
                 .expectation(description: "expectingFatalError_\(file):\(line)")
             
-            var assertionError: T? = nil
+            var fatalError: T? = nil
             
             FatalErrorUtilities.replaceFatalError { error, _, _ in
-                assertionError = error as? T
+                fatalError = error as? T
                 expectation.fulfill()
                 unreachable()
             }
             
-            queue().async(execute: testcase)
+            let thread = ClosureThread(testcase)
+            thread.start()
             
             waitForExpectations(timeout: timeout) { _ in
-                XCTAssertEqual(assertionError, 
-                               expectedError, 
-                               file: file, 
+                XCTAssertEqual(fatalError,
+                               expectedError,
+                               file: file,
                                line: line)
+                
                 FatalErrorUtilities.restoreFatalError()
+                
+                thread.cancel()
             }
     }
     
@@ -61,24 +63,21 @@ extension XCTestCase {
     ///   - message: The `String` you expect `testcase` to pass to
     ///              `fatalError()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectFatalError(
         expectedMessage message: String,
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void) {
         expectFatalError(expectedError: AnonymousError(string: message),
                          timeout: timeout,
                          file: file,
                          line: line,
-                         queue: queue(),
                          testcase: testcase)
     }
     
@@ -86,31 +85,31 @@ extension XCTestCase {
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 10 seconds.
+    ///              defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
-    ///   - queue: The dispatch queue on which to enqueue `testcase`.
     ///   - testcase: The closure to run that produces the error.
     public func expectFatalError(
-        timeout: TimeInterval = 10,
+        timeout: TimeInterval = 2,
         in context: StaticString = #function,
         file: StaticString = #file,
         line: UInt = #line,
-        queue: @autoclosure () -> DispatchQueue = .global(),
         testcase: @escaping () -> Void) {
         let expectation = self
             .expectation(description: "expectingFatalError_\(file):\(line)")
         
-        FatalErrorUtilities.replaceFatalError { error, _, _ in
+        FatalErrorUtilities.replaceFatalError { _, _, _ in
             expectation.fulfill()
             unreachable()
         }
         
-        queue().async(execute: testcase)
+        let thread = ClosureThread(testcase)
+        thread.start()
         
         waitForExpectations(timeout: timeout) { _ in
             FatalErrorUtilities.restoreFatalError()
+            thread.cancel()
         }
     }
     

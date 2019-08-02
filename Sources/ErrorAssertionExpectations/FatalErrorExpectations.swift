@@ -136,14 +136,20 @@ extension XCTestCase {
             description: "Expecting no fatal error to occur."
         )
         
-        expectation.isInverted = true
-        
         FatalErrorUtilities.replaceFatalError { _, _, _ in
+            XCTFail("Received a fatal error when expecting none",
+                    file: file,
+                    line: line)
+            
             expectation.fulfill()
             unreachable()
         }
         
-        let thread = ClosureThread(testcase)
+        let thread = ClosureThread {
+            testcase()
+            expectation.fulfill()
+        }
+        
         thread.start()
         
         waitForExpectations(timeout: timeout) { _ in

@@ -156,21 +156,31 @@ extension XCTestCase {
             description: "Expecting no assertion failure to occur."
         )
         
-        expectation.isInverted = true
-        
         AssertUtilities.replaceAssert { condition, _, _, _ in
             if !condition {
+                XCTFail("Received an assertion failure when expecting none",
+                        file: file,
+                        line: line)
+                
                 expectation.fulfill()
                 unreachable()
             }
         }
         
         AssertUtilities.replaceAssertionFailure { _, _, _ in
+            XCTFail("Received an assertion failure when expecting none",
+                    file: file,
+                    line: line)
+            
             expectation.fulfill()
             unreachable()
         }
         
-        let thread = ClosureThread(testcase)
+        let thread = ClosureThread {
+            testcase()
+            expectation.fulfill()
+        }
+        
         thread.start()
         
         waitForExpectations(timeout: timeout) { _ in

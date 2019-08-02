@@ -169,21 +169,33 @@ extension XCTestCase {
             description: "Expecting no precondition failure to occur"
         )
         
-        expectation.isInverted = true
-        
         PreconditionUtilities.replacePrecondition { condition, _, _, _ in
             if !condition {
+                XCTFail("Received a precondition failure when expecting none",
+                        file: file,
+                        line: line)
+                
                 expectation.fulfill()
+                
                 unreachable()
             }
         }
         
         PreconditionUtilities.replacePreconditionFailure { _, _, _ in
+            XCTFail("Received a precondition failure when expecting none",
+                    file: file,
+                    line: line)
+            
             expectation.fulfill()
+            
             unreachable()
         }
         
-        let thread = ClosureThread(testcase)
+        let thread = ClosureThread {
+            testcase()
+            expectation.fulfill()
+        }
+        
         thread.start()
         
         waitForExpectations(timeout: timeout) { _ in

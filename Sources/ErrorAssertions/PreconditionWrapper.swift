@@ -5,6 +5,7 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
+@inlinable
 public func precondition(_ condition: @autoclosure () -> Bool,
                          error: Error,
                          file: StaticString = #file,
@@ -12,6 +13,7 @@ public func precondition(_ condition: @autoclosure () -> Bool,
     PreconditionUtilities.preconditionClosure(condition(), error, file, line)
 }
 
+@inlinable
 public func precondition(_ condition: @autoclosure () -> Bool,
                          _ message: @autoclosure () -> String = String(),
                          file: StaticString = #file,
@@ -22,12 +24,14 @@ public func precondition(_ condition: @autoclosure () -> Bool,
                  line: line)
 }
 
+@inlinable
 public func preconditionFailure(error: Error,
                                 file: StaticString = #file,
                                 line: UInt = #line) {
     PreconditionUtilities.preconditionFailureClosure(error, file, line)
 }
 
+@inlinable
 public func preconditionFailure(_ message: @autoclosure () -> String = String(),
                                 file: StaticString = #file,
                                 line: UInt = #line) {
@@ -44,9 +48,11 @@ public struct PreconditionUtilities {
     public typealias PreconditionFailureClosure = 
         (Error, StaticString, UInt) -> Never
     
-    fileprivate static var preconditionClosure = defaultPreconditionClosure
+    @usableFromInline
+    internal static var preconditionClosure = defaultPreconditionClosure
     
-    fileprivate static var preconditionFailureClosure =
+    @usableFromInline
+    internal static var preconditionFailureClosure =
     defaultPreconditionFailureClosure
     
     private static let defaultPreconditionClosure = {

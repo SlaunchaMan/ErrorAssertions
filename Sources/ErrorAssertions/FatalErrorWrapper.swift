@@ -5,12 +5,14 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
+@inlinable
 public func fatalError(_ error: Error,
                        file: StaticString = #file,
                        line: UInt = #line) -> Never {
     FatalErrorUtilities.fatalErrorClosure(error, file, line)
 }
 
+@inlinable
 public func fatalError(_ message: @autoclosure () -> String = String(),
                        file: StaticString = #file,
                        line: UInt = #line) -> Never {
@@ -23,7 +25,8 @@ public struct FatalErrorUtilities {
     
     public typealias FatalErrorClosure = (Error, StaticString, UInt) -> Never
     
-    fileprivate static var fatalErrorClosure = defaultFatalErrorClosure
+    @usableFromInline
+    internal static var fatalErrorClosure = defaultFatalErrorClosure
     
     private static let defaultFatalErrorClosure = {
         (error: Error, file: StaticString, line: UInt) -> Never in

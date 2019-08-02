@@ -5,6 +5,7 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
+@inlinable
 public func assert(_ condition: @autoclosure () -> Bool,
                    error: Error,
                    file: StaticString = #file,
@@ -12,6 +13,7 @@ public func assert(_ condition: @autoclosure () -> Bool,
     AssertUtilities.assertClosure(condition(), error, file, line)
 }
 
+@inlinable
 public func assert(_ condition: @autoclosure () -> Bool,
                    _ message: @autoclosure () -> String = String(),
                    file: StaticString = #file,
@@ -22,12 +24,14 @@ public func assert(_ condition: @autoclosure () -> Bool,
            line: line)
 }
 
+@inlinable
 public func assertionFailure(error: Error,
                              file: StaticString = #file,
                              line: UInt = #line) {
     AssertUtilities.assertionFailureClosure(error, file, line)
 }
 
+@inlinable
 public func assertionFailure(_ message: @autoclosure () -> String = String(),
                              file: StaticString = #file,
                              line: UInt = #line) {
@@ -43,10 +47,11 @@ public struct AssertUtilities {
     public typealias AssertionFailureClosure =
         (Error, StaticString, UInt) -> ()
     
-    fileprivate static var assertClosure = defaultAssertClosure
+    @usableFromInline
+    internal static var assertClosure = defaultAssertClosure
     
-    fileprivate static var assertionFailureClosure =
-    defaultAssertionFailureClosure
+    @usableFromInline
+    internal static var assertionFailureClosure = defaultAssertionFailureClosure
     
     private static let defaultAssertClosure = {
         (condition: Bool, error: Error, file: StaticString, line: UInt) in

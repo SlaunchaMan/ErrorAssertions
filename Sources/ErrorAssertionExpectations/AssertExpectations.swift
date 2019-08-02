@@ -18,7 +18,7 @@ extension XCTestCase {
     ///   - expectedError: The `Error` you expect `testcase` to pass to
     ///                    `assert()` or `assertionFailure()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 2 seconds.
+    ///              Defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
@@ -30,8 +30,10 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) where T: Equatable {
-        let expectation = self
-            .expectation(description: "expectingAssert_\(file):\(line)")
+        let expectation = self.expectation(
+            description: "Expecting an assertion failure to occur."
+        )
+        
         var assertionError: T? = nil
         
         AssertUtilities.replaceAssert { condition, error, _, _ in
@@ -71,7 +73,7 @@ extension XCTestCase {
     ///   - message: The `String` you expect `testcase` to pass to
     ///              `assert()`.
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 2 seconds.
+    ///              Defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
@@ -96,7 +98,7 @@ extension XCTestCase {
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to produce its error.
-    ///              defaults to 2 seconds.
+    ///              Defaults to 2 seconds.
     ///   - file: The test file. By default, this will be the file from which
     ///           you’re calling this method.
     ///   - line: The line number in `file` where this is called.
@@ -107,8 +109,54 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) {
-        let expectation = self
-            .expectation(description: "expectingAssert_\(file):\(line)")
+        let expectation = self.expectation(
+            description: "Expecting an assertion failure to occur."
+        )
+        
+        AssertUtilities.replaceAssert { condition, _, _, _ in
+            if !condition {
+                expectation.fulfill()
+                unreachable()
+            }
+        }
+        
+        AssertUtilities.replaceAssertionFailure { _, _, _ in
+            expectation.fulfill()
+            unreachable()
+        }
+        
+        let thread = ClosureThread(testcase)
+        thread.start()
+        
+        waitForExpectations(timeout: timeout) { _ in
+            AssertUtilities.restoreAssert()
+            AssertUtilities.restoreAssertionFailure()
+            
+            thread.cancel()
+        }
+    }
+    
+    /// Executes the `testcase` closure and expects it finish without producing
+    /// an assertion failure.
+    ///
+    /// - Parameters:
+    ///   - timeout: How long to wait for `testcase` to finish. Defaults to 2
+    ///              seconds.
+    ///   - file: The test file. By default, this will be the file from which
+    ///           you’re calling this method.
+    ///   - line: The line number in `file` where this is called.
+    ///   - testcase: The closure to run.
+    public func expectNoAssertionFailure(
+        timeout: TimeInterval = 2,
+        file: StaticString = #file,
+        line: UInt = #line,
+        testcase: @escaping () -> Void
+    ) {
+        let expectation = self.expectation(
+            description: "Expecting no assertion failure to occur."
+        )
+        
+        expectation.isInverted = true
         
         AssertUtilities.replaceAssert { condition, _, _, _ in
             if !condition {

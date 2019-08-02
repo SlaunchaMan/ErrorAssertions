@@ -71,6 +71,12 @@ final class PreconditionTests: XCTestCase {
         }
     }
     
+    func testExpectingNoPreconditionFailure() {
+        expectNoPreconditionFailure {
+            
+        }
+    }
+    
     static var allTests = [
         ("testPreconditionFailuresSendExpectedErrors",
          testPreconditionFailuresSendExpectedErrors),
@@ -86,6 +92,9 @@ final class PreconditionTests: XCTestCase {
         
         ("testPreconditionFailureWithMessageWithoutCapturingError",
          testPreconditionFailureWithMessageWithoutCapturingError),
+        
+        ("testExpectingNoPreconditionFailure",
+         testExpectingNoPreconditionFailure),
     ]
     
 }

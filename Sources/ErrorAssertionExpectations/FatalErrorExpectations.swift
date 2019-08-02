@@ -115,4 +115,41 @@ extension XCTestCase {
         }
     }
     
+    /// Executes the `testcase` closure and expects it execute without producing
+    /// a fatal error.
+    ///
+    /// - Parameters:
+    ///   - timeout: How long to wait for `testcase` to finish. Defaults to 2
+    ///              seconds.
+    ///   - file: The test file. By default, this will be the file from which
+    ///           you’re calling this method.
+    ///   - line: The line number in `file` where this is called.
+    ///   - testcase: The closure to run.
+    public func expectNoFatalError(
+        timeout: TimeInterval = 2,
+        in context: StaticString = #function,
+        file: StaticString = #file,
+        line: UInt = #line,
+        testcase: @escaping () -> Void
+    ) {
+        let expectation = self.expectation(
+            description: "Expecting no fatal error to occur."
+        )
+        
+        expectation.isInverted = true
+        
+        FatalErrorUtilities.replaceFatalError { _, _, _ in
+            expectation.fulfill()
+            unreachable()
+        }
+        
+        let thread = ClosureThread(testcase)
+        thread.start()
+        
+        waitForExpectations(timeout: timeout) { _ in
+            FatalErrorUtilities.restoreFatalError()
+            thread.cancel()
+        }
+    }
+    
 }

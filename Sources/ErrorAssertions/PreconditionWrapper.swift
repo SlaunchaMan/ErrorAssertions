@@ -5,7 +5,6 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
-#if DEBUG
 public func precondition(_ condition: @autoclosure () -> Bool,
                          error: Error,
                          file: StaticString = #file,
@@ -64,10 +63,11 @@ public struct PreconditionUtilities {
                                   file: file, 
                                   line: line)
     }
-
+    
+    #if DEBUG
     static public func replacePrecondition(
         closure: @escaping PreconditionClosure
-        ) {
+    ) {
         preconditionClosure = closure
     }
     
@@ -85,6 +85,6 @@ public struct PreconditionUtilities {
         preconditionFailureClosure = PreconditionUtilities
             .defaultPreconditionFailureClosure
     }
+    #endif
     
 }
-#endif

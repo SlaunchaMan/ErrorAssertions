@@ -47,6 +47,12 @@ final class FatalErrorTests: XCTestCase {
         }
     }
     
+    func testExpectingNoFatalError() {
+        expectNoFatalError {
+
+        }
+    }
+    
     static var allTests = [
         ("testFatalErrorsSendExpectedErrors",
          testFatalErrorsSendExpectedErrors),
@@ -62,6 +68,8 @@ final class FatalErrorTests: XCTestCase {
         
         ("testFatalErrorWithMessageWithoutCapturingError",
          testFatalErrorWithMessageWithoutCapturingError),
+        
+        ("testExpectingNoFatalError", testExpectingNoFatalError),
     ]
     
 }

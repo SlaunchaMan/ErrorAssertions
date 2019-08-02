@@ -7,7 +7,6 @@
 
 import Foundation
 
-#if DEBUG
 public enum AnonymousError: Error {
     
     case blank
@@ -31,4 +30,3 @@ extension AnonymousError: LocalizedError {
     }
     
 }
-#endif

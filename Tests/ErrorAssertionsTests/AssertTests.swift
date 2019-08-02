@@ -73,6 +73,12 @@ final class AssertTests: XCTestCase {
         }
     }
     
+    func testExpectingNoAssertionFailure() {
+        expectNoAssertionFailure {
+            
+        }
+    }
+    
     static var allTests = [
         ("testAssertionFailuresSendExpectedErrors",
          testAssertionFailuresSendExpectedErrors),
@@ -88,6 +94,8 @@ final class AssertTests: XCTestCase {
         
         ("testAssertionFailureWithMessageWithoutCapturingError",
          testAssertionFailureWithMessageWithoutCapturingError),
+        
+        ("testExpectingNoAssertionFailure", testExpectingNoAssertionFailure),
     ]
     
 }

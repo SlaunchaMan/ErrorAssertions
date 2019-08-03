@@ -11,6 +11,52 @@ import ErrorAssertions
 
 extension XCTestCase {
     
+    private func replacePrecondition(_ handler: @escaping (Error) -> Void) -> RestorationHandler {
+        var restorationHandlers: [() -> Void] = []
+        
+        restorationHandlers.append(
+            PreconditionUtilities.replacePrecondition { condition, error, _, _ in
+                if !condition {
+                    handler(error)
+                    unreachable()
+                }
+            }
+        )
+        
+        restorationHandlers.append(
+            PreconditionUtilities.replacePreconditionFailure { error, _, _ in
+                handler(error)
+                unreachable()
+            }
+        )
+        
+        return {
+            restorationHandlers.forEach { $0() }
+        }
+    }
+    
+    private func wrapWithAssertions(_ testcase: @escaping () -> Void,
+                                    timeout: TimeInterval,
+                                    handler: ((Error) -> Void)? = nil) {
+        let expectation = self.expectation(
+            description: "Expecting a precondition failure to occur."
+        )
+        
+        let restoration = replacePrecondition { error in
+            handler?(error)
+            expectation.fulfill()
+        }
+        
+        defer { restoration() }
+        
+        let thread = ClosureThread(testcase)
+        thread.start()
+        
+        wait(for: [expectation], timeout: timeout)
+        
+        thread.cancel()
+    }
+    
     /// Executes the `testcase` closure and expects it to produce a specific
     /// precondition failure.
     ///
@@ -30,53 +76,12 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) where T: Equatable {
-        let expectation = self.expectation(
-            description: "Expecting a precondition failure to occur"
-        )
-        
-        var preconditionError: Error? = nil
-        
-        PreconditionUtilities.replacePrecondition { condition, error, _, _ in
-            if !condition {
-                preconditionError = error
-                expectation.fulfill()
-                unreachable()
-            }
-        }
-        
-        defer { PreconditionUtilities.restorePrecondition() }
-        
-        PreconditionUtilities.replacePreconditionFailure {
-            error, _, _ -> Never in
-            preconditionError = error
-            expectation.fulfill()
-            unreachable()
-        }
-        
-        defer { PreconditionUtilities.restorePreconditionFailure() }
-        
-        let thread = ClosureThread(testcase)
-        thread.start()
-        
-        defer { thread.cancel() }
-        
-        waitForExpectations(timeout: timeout) { error in
-            guard error == nil else { return }
-            
-            guard let specificError = preconditionError as? T else {
-                XCTFail("Expected a \(T.self), received \(preconditionError!)",
-                    file: file,
-                    line: line)
-                
-                return
-            }
-            
-            XCTAssertEqual(specificError,
+        wrapWithAssertions(testcase, timeout: timeout) { error in
+            XCTAssertEqual(error as? T,
                            expectedError,
                            file: file,
                            line: line)
         }
-        
     }
     
     /// Executes the `testcase` closure and expects it to produce a specific
@@ -122,31 +127,7 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) {
-        let expectation = self.expectation(
-            description: "Expecting a precondition failure to occur"
-        )
-        
-        PreconditionUtilities.replacePrecondition {
-            condition, _, _, _ in
-            if !condition {
-                expectation.fulfill()
-                unreachable()
-            }
-        }
-        
-        PreconditionUtilities.replacePreconditionFailure { _, _, _ -> Never in
-            expectation.fulfill()
-            unreachable()
-        }
-        
-        let thread = ClosureThread(testcase)
-        thread.start()
-        
-        waitForExpectations(timeout: timeout) { _ in
-            PreconditionUtilities.restorePrecondition()
-            PreconditionUtilities.restorePreconditionFailure()
-            thread.cancel()
-        }
+        wrapWithAssertions(testcase, timeout: timeout)
     }
     
     /// Executes the `testcase` closure and expects it finish without producing
@@ -169,27 +150,15 @@ extension XCTestCase {
             description: "Expecting no precondition failure to occur"
         )
         
-        PreconditionUtilities.replacePrecondition { condition, _, _, _ in
-            if !condition {
-                XCTFail("Received a precondition failure when expecting none",
-                        file: file,
-                        line: line)
-                
-                expectation.fulfill()
-                
-                unreachable()
-            }
-        }
-        
-        PreconditionUtilities.replacePreconditionFailure { _, _, _ in
+        let restoration = replacePrecondition { _ in
             XCTFail("Received a precondition failure when expecting none",
                     file: file,
                     line: line)
             
             expectation.fulfill()
-            
-            unreachable()
         }
+        
+        defer { restoration() }
         
         let thread = ClosureThread {
             testcase()
@@ -198,12 +167,9 @@ extension XCTestCase {
         
         thread.start()
         
-        waitForExpectations(timeout: timeout) { _ in
-            PreconditionUtilities.restorePrecondition()
-            PreconditionUtilities.restorePreconditionFailure()
-            
-            thread.cancel()
-        }
+        wait(for: [expectation], timeout: timeout)
+        
+        thread.cancel()
     }
     
 }

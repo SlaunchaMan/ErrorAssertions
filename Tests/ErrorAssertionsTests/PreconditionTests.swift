@@ -77,6 +77,49 @@ final class PreconditionTests: XCTestCase {
         }
     }
     
+    func testPreconditionsDoNotContinueExecution() {
+        let expectation = self.expectation(description:
+            "The code after the precondition should not execute"
+        )
+        
+        expectation.isInverted = true
+        
+        expectPreconditionFailure {
+            precondition(false)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testPreconditionFailuresDoNotContinueExecution() {
+        let expectation = self.expectation(description:
+            "The code after the precondition should not execute"
+        )
+        
+        expectation.isInverted = true
+        
+        expectPreconditionFailure {
+            ErrorAssertions.preconditionFailure()
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testPreconditionsDoContinueExecution() {
+        let expectation = self.expectation(description:
+            "The code after the assert executed"
+        )
+        
+        expectNoPreconditionFailure {
+            precondition(true)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
     static var allTests = [
         ("testPreconditionFailuresSendExpectedErrors",
          testPreconditionFailuresSendExpectedErrors),

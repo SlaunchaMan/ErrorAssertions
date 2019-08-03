@@ -38,11 +38,12 @@ public struct FatalErrorUtilities {
     #if DEBUG
     static public func replaceFatalError(
         closure: @escaping FatalErrorClosure
-    ) {
+    ) -> RestorationHandler {
         fatalErrorClosure = closure
+        return restoreFatalError
     }
     
-    static public func restoreFatalError() {
+    static private func restoreFatalError() {
         fatalErrorClosure = defaultFatalErrorClosure
     }
     #endif

@@ -11,6 +11,52 @@ import ErrorAssertions
 
 extension XCTestCase {
     
+    private func replaceAssert(_ handler: @escaping (Error) -> Void) -> RestorationHandler {
+        var restorationHandlers: [RestorationHandler] = []
+        
+        restorationHandlers.append(
+            AssertUtilities.replaceAssert { condition, error, _, _ in
+                if !condition {
+                    handler(error)
+                    unreachable()
+                }
+            }
+        )
+        
+        restorationHandlers.append(
+            AssertUtilities.replaceAssertionFailure { error, _, _ in
+                handler(error)
+                unreachable()
+            }
+        )
+        
+        return {
+            restorationHandlers.forEach { $0() }
+        }
+    }
+    
+    private func wrapWithAssertions(_ testcase: @escaping () -> Void,
+                                    timeout: TimeInterval,
+                                    handler: ((Error) -> Void)? = nil) {
+        let expectation = self.expectation(
+            description: "Expecting an assertion failure to occur"
+        )
+        
+        let restoration = replaceAssert { error in
+            handler?(error)
+            expectation.fulfill()
+        }
+        
+        defer { restoration() }
+        
+        let thread = ClosureThread(testcase)
+        thread.start()
+        
+        wait(for: [expectation], timeout: timeout)
+
+        thread.cancel()
+    }
+    
     /// Executes the `testcase` closure and expects it to produce a specific
     /// assertion failure.
     ///
@@ -30,39 +76,11 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) where T: Equatable {
-        let expectation = self.expectation(
-            description: "Expecting an assertion failure to occur."
-        )
-        
-        var assertionError: T? = nil
-        
-        AssertUtilities.replaceAssert { condition, error, _, _ in
-            if !condition {
-                assertionError = error as? T
-                expectation.fulfill()
-                unreachable()
-            }
-        }
-        
-        AssertUtilities.replaceAssertionFailure { error, _, _ in
-            assertionError = error as? T
-            expectation.fulfill()
-            unreachable()
-        }
-        
-        let thread = ClosureThread(testcase)
-        thread.start()
-        
-        waitForExpectations(timeout: timeout) { _ in
-            XCTAssertEqual(assertionError,
+        wrapWithAssertions(testcase, timeout: timeout) { error in
+            XCTAssertEqual(error as? T,
                            expectedError,
                            file: file,
                            line: line)
-            
-            AssertUtilities.restoreAssert()
-            AssertUtilities.restoreAssertionFailure()
-            
-            thread.cancel()
         }
     }
     
@@ -109,31 +127,7 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) {
-        let expectation = self.expectation(
-            description: "Expecting an assertion failure to occur."
-        )
-        
-        AssertUtilities.replaceAssert { condition, _, _, _ in
-            if !condition {
-                expectation.fulfill()
-                unreachable()
-            }
-        }
-        
-        AssertUtilities.replaceAssertionFailure { _, _, _ in
-            expectation.fulfill()
-            unreachable()
-        }
-        
-        let thread = ClosureThread(testcase)
-        thread.start()
-        
-        waitForExpectations(timeout: timeout) { _ in
-            AssertUtilities.restoreAssert()
-            AssertUtilities.restoreAssertionFailure()
-            
-            thread.cancel()
-        }
+        wrapWithAssertions(testcase, timeout: timeout)
     }
     
     /// Executes the `testcase` closure and expects it finish without producing
@@ -153,28 +147,18 @@ extension XCTestCase {
         testcase: @escaping () -> Void
     ) {
         let expectation = self.expectation(
-            description: "Expecting no assertion failure to occur."
+            description: "Expecting no assertion failure to occur"
         )
         
-        AssertUtilities.replaceAssert { condition, _, _, _ in
-            if !condition {
-                XCTFail("Received an assertion failure when expecting none",
-                        file: file,
-                        line: line)
-                
-                expectation.fulfill()
-                unreachable()
-            }
-        }
-        
-        AssertUtilities.replaceAssertionFailure { _, _, _ in
+        let restoration = replaceAssert { _ in
             XCTFail("Received an assertion failure when expecting none",
                     file: file,
                     line: line)
             
             expectation.fulfill()
-            unreachable()
         }
+        
+        defer { restoration() }
         
         let thread = ClosureThread {
             testcase()
@@ -183,12 +167,9 @@ extension XCTestCase {
         
         thread.start()
         
-        waitForExpectations(timeout: timeout) { _ in
-            AssertUtilities.restoreAssert()
-            AssertUtilities.restoreAssertionFailure()
-            
-            thread.cancel()
-        }
+        wait(for: [expectation], timeout: timeout)
+        
+        thread.cancel()
     }
     
 }

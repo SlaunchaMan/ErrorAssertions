@@ -69,21 +69,25 @@ public struct AssertUtilities {
     }
     
     #if DEBUG
-    static public func replaceAssert(closure: @escaping AssertClosure) {
+    static public func replaceAssert(
+        with closure: @escaping AssertClosure
+    ) -> RestorationHandler {
         assertClosure = closure
+        return restoreAssert
     }
     
-    static public func restoreAssert() {
+    static private func restoreAssert() {
         assertClosure = AssertUtilities.defaultAssertClosure
     }
     
     static public func replaceAssertionFailure(
-        closure: @escaping AssertionFailureClosure
-    ) {
+        with closure: @escaping AssertionFailureClosure
+    ) -> RestorationHandler {
         assertionFailureClosure = closure
+        return restoreAssertionFailure
     }
     
-    static public func restoreAssertionFailure() {
+    static private func restoreAssertionFailure() {
         assertionFailureClosure = AssertUtilities.defaultAssertionFailureClosure
     }
     #endif

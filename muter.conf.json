@@ -1,0 +1,10 @@
+{
+  "arguments" : [
+    "test"
+  ],
+  "exclude" : [
+
+  ],
+  "executable" : "/usr/bin/swift",
+  "arguments": ["test"]
+}

@@ -53,6 +53,21 @@ final class FatalErrorTests: XCTestCase {
         }
     }
     
+    func testFatalErrorsDoNotContinueExecution() {
+        let expectation = self.expectation(
+            description: "The code after the fatal error should not execute"
+        )
+        
+        expectation.isInverted = true
+        
+        expectFatalError {
+            defer { expectation.fulfill() }
+            fatalError()
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
     static var allTests = [
         ("testFatalErrorsSendExpectedErrors",
          testFatalErrorsSendExpectedErrors),
@@ -70,6 +85,9 @@ final class FatalErrorTests: XCTestCase {
          testFatalErrorWithMessageWithoutCapturingError),
         
         ("testExpectingNoFatalError", testExpectingNoFatalError),
+        
+        ("testFatalErrorsDoNotContinueExecution",
+         testFatalErrorsDoNotContinueExecution)
     ]
     
 }

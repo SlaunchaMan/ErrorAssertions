@@ -73,21 +73,23 @@ public struct PreconditionUtilities {
     #if DEBUG
     static public func replacePrecondition(
         closure: @escaping PreconditionClosure
-    ) {
+    ) -> RestorationHandler {
         preconditionClosure = closure
+        return restorePrecondition
     }
     
-    static public func restorePrecondition() {
+    static private func restorePrecondition() {
         preconditionClosure = defaultPreconditionClosure
     }
     
     static public func replacePreconditionFailure(
         closure: @escaping PreconditionFailureClosure
-    ) {
+    ) -> RestorationHandler {
         preconditionFailureClosure = closure
+        return restorePreconditionFailure
     }
     
-    static public func restorePreconditionFailure() {
+    static private func restorePreconditionFailure() {
         preconditionFailureClosure = PreconditionUtilities
             .defaultPreconditionFailureClosure
     }

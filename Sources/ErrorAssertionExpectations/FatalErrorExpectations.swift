@@ -11,6 +11,35 @@ import ErrorAssertions
 
 extension XCTestCase {
     
+    private func replaceFatalError(_ handler: @escaping (Error) -> Void) -> RestorationHandler {
+        return FatalErrorUtilities.replaceFatalError { error, _, _ in
+            handler(error)
+            unreachable()
+        }
+    }
+    
+    private func wrapWithAssertions(_ testcase: @escaping () -> Void,
+                                    timeout: TimeInterval,
+                                    handler: ((Error) -> Void)? = nil) {
+        let expectation = self.expectation(
+            description: "Expecting a fatal error to occur."
+        )
+        
+        let restoration = replaceFatalError { error in
+            handler?(error)
+            expectation.fulfill()
+        }
+        
+        defer { restoration() }
+        
+        let thread = ClosureThread(testcase)
+        thread.start()
+        
+        wait(for: [expectation], timeout: timeout)
+        
+        thread.cancel()
+    }
+    
     /// Executes the `testcase` closure and expects it to produce a specific
     /// fatal error.
     ///
@@ -30,29 +59,11 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) where T: Equatable {
-        let expectation = self
-            .expectation(description: "expectingFatalError_\(file):\(line)")
-        
-        var fatalError: T? = nil
-        
-        FatalErrorUtilities.replaceFatalError { error, _, _ in
-            fatalError = error as? T
-            expectation.fulfill()
-            unreachable()
-        }
-        
-        let thread = ClosureThread(testcase)
-        thread.start()
-        
-        waitForExpectations(timeout: timeout) { _ in
-            XCTAssertEqual(fatalError,
+        wrapWithAssertions(testcase, timeout: timeout) { error in
+            XCTAssertEqual(error as? T,
                            expectedError,
                            file: file,
                            line: line)
-            
-            FatalErrorUtilities.restoreFatalError()
-            
-            thread.cancel()
         }
     }
     
@@ -98,21 +109,7 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) {
-        let expectation = self
-            .expectation(description: "expectingFatalError_\(file):\(line)")
-        
-        FatalErrorUtilities.replaceFatalError { _, _, _ in
-            expectation.fulfill()
-            unreachable()
-        }
-        
-        let thread = ClosureThread(testcase)
-        thread.start()
-        
-        waitForExpectations(timeout: timeout) { _ in
-            FatalErrorUtilities.restoreFatalError()
-            thread.cancel()
-        }
+        wrapWithAssertions(testcase, timeout: timeout)
     }
     
     /// Executes the `testcase` closure and expects it execute without producing
@@ -133,17 +130,18 @@ extension XCTestCase {
         testcase: @escaping () -> Void
     ) {
         let expectation = self.expectation(
-            description: "Expecting no fatal error to occur."
+            description: "Expecting no fatal error to occur"
         )
         
-        FatalErrorUtilities.replaceFatalError { _, _, _ in
+        let restoration = replaceFatalError { _ in
             XCTFail("Received a fatal error when expecting none",
                     file: file,
                     line: line)
             
             expectation.fulfill()
-            unreachable()
         }
+        
+        defer { restoration() }
         
         let thread = ClosureThread {
             testcase()
@@ -152,10 +150,9 @@ extension XCTestCase {
         
         thread.start()
         
-        waitForExpectations(timeout: timeout) { _ in
-            FatalErrorUtilities.restoreFatalError()
-            thread.cancel()
-        }
+        wait(for: [expectation], timeout: timeout)
+        
+        thread.cancel()
     }
     
 }

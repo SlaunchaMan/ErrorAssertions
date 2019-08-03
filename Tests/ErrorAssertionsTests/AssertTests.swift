@@ -24,7 +24,7 @@ final class AssertTests: XCTestCase {
         expectAssertionFailure(expectedError: TestError.testErrorA) {
             assertionFailure(error: TestError.testErrorA)
         }
-
+        
         expectAssertionFailure(expectedError: TestError.testErrorB) { 
             assertionFailure(error: TestError.testErrorB)
         }
@@ -34,7 +34,7 @@ final class AssertTests: XCTestCase {
         expectAssertionFailure(expectedError: AnonymousError.blank) { 
             assert(false)
         }
-
+        
         expectAssertionFailure(expectedError: AnonymousError.blank) { 
             assertionFailure()
         }
@@ -46,7 +46,7 @@ final class AssertTests: XCTestCase {
         expectAssertionFailure(expectedError: expectedError) { 
             assert(false, "test")
         }
-
+        
         expectAssertionFailure(expectedError: expectedError) { 
             assertionFailure("test")
         }
@@ -60,14 +60,14 @@ final class AssertTests: XCTestCase {
         expectAssertionFailure {
             assertionFailure()
         }
-
+        
     }
     
     func testAssertionFailureWithMessageWithoutCapturingError() {
         expectAssertionFailure(expectedMessage: "test") {
             assert(false, "test")
         }
-
+        
         expectAssertionFailure(expectedMessage: "test") {
             assertionFailure("test")
         }
@@ -77,6 +77,49 @@ final class AssertTests: XCTestCase {
         expectNoAssertionFailure {
             
         }
+    }
+    
+    func testAssertionsDoNotContinueExecution() {
+        let expectation = self.expectation(description:
+            "The code after the assert should not execute"
+        )
+        
+        expectation.isInverted = true
+        
+        expectAssertionFailure {
+            assert(false)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testAssertionFailuresDoNotContinueExecution() {
+        let expectation = self.expectation(description:
+            "The code after the assert should not execute"
+        )
+        
+        expectation.isInverted = true
+        
+        expectAssertionFailure {
+            assertionFailure()
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testAssertionsDoContinueExecution() {
+        let expectation = self.expectation(description:
+            "The code after the assert executed"
+        )
+        
+        expectNoAssertionFailure {
+            assert(true)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1)
     }
     
     static var allTests = [
@@ -96,6 +139,14 @@ final class AssertTests: XCTestCase {
          testAssertionFailureWithMessageWithoutCapturingError),
         
         ("testExpectingNoAssertionFailure", testExpectingNoAssertionFailure),
+        
+        ("testAssertionsDoNotContinueExecution",
+         testAssertionsDoNotContinueExecution),
+        
+        ("testAssertionFailuresDoNotContinueExecution",
+         testAssertionFailuresDoNotContinueExecution),
+        
+        ("testAssertionsDoContinueExecution", testAssertionsDoContinueExecution)
     ]
     
 }

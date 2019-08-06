@@ -68,6 +68,23 @@ final class FatalErrorTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
+    func testFatalErrorExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectFatalError {
+            thread = Thread.current
+            fatalError()
+        }
+        
+        do {
+            let receivedThread = try XCTUnwrap(thread)
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        catch {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
     static var allTests = [
         ("testFatalErrorsSendExpectedErrors",
          testFatalErrorsSendExpectedErrors),
@@ -87,7 +104,10 @@ final class FatalErrorTests: XCTestCase {
         ("testExpectingNoFatalError", testExpectingNoFatalError),
         
         ("testFatalErrorsDoNotContinueExecution",
-         testFatalErrorsDoNotContinueExecution)
+         testFatalErrorsDoNotContinueExecution),
+        
+        ("testFatalErrorExpectationThreadDies",
+         testFatalErrorExpectationThreadDies),
     ]
     
 }

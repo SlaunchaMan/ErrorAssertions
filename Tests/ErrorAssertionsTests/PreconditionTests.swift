@@ -120,6 +120,40 @@ final class PreconditionTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
+    func testPreconditionExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectPreconditionFailure {
+            thread = Thread.current
+            precondition(false)
+        }
+        
+        do {
+            let receivedThread = try XCTUnwrap(thread)
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        catch {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
+    func testPreconditionFailureExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectPreconditionFailure {
+            thread = Thread.current
+            ErrorAssertions.preconditionFailure()
+        }
+        
+        do {
+            let receivedThread = try XCTUnwrap(thread)
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        catch {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
     static var allTests = [
         ("testPreconditionFailuresSendExpectedErrors",
          testPreconditionFailuresSendExpectedErrors),
@@ -138,6 +172,21 @@ final class PreconditionTests: XCTestCase {
         
         ("testExpectingNoPreconditionFailure",
          testExpectingNoPreconditionFailure),
+        
+        ("testPreconditionsDoNotContinueExecution",
+         testPreconditionsDoNotContinueExecution),
+        
+        ("testPreconditionFailuresDoNotContinueExecution",
+         testPreconditionFailuresDoNotContinueExecution),
+        
+        ("testPreconditionsDoContinueExecution",
+         testPreconditionsDoContinueExecution),
+        
+        ("testPreconditionExpectationThreadDies",
+         testPreconditionExpectationThreadDies),
+        
+        ("testPreconditionFailureExpectationThreadDies",
+         testPreconditionFailureExpectationThreadDies),
     ]
     
 }

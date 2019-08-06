@@ -122,6 +122,40 @@ final class AssertTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
+    func testAssertExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectAssertionFailure {
+            thread = Thread.current
+            assert(false)
+        }
+        
+        do {
+            let receivedThread = try XCTUnwrap(thread)
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        catch {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
+    func testAssertionFailureExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectAssertionFailure {
+            thread = Thread.current
+            assertionFailure()
+        }
+        
+        do {
+            let receivedThread = try XCTUnwrap(thread)
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        catch {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
     static var allTests = [
         ("testAssertionFailuresSendExpectedErrors",
          testAssertionFailuresSendExpectedErrors),
@@ -146,7 +180,14 @@ final class AssertTests: XCTestCase {
         ("testAssertionFailuresDoNotContinueExecution",
          testAssertionFailuresDoNotContinueExecution),
         
-        ("testAssertionsDoContinueExecution", testAssertionsDoContinueExecution)
+        ("testAssertionsDoContinueExecution",
+         testAssertionsDoContinueExecution),
+        
+        ("testAssertExpectationThreadDies", testAssertExpectationThreadDies),
+        
+        ("testAssertionFailureExpectationThreadDies",
+         testAssertionFailureExpectationThreadDies),
+        
     ]
     
 }

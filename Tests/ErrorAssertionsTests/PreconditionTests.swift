@@ -128,11 +128,10 @@ final class PreconditionTests: XCTestCase {
             precondition(false)
         }
         
-        do {
-            let receivedThread = try XCTUnwrap(thread)
+        if let receivedThread = thread {
             XCTAssertTrue(receivedThread.isCancelled)
         }
-        catch {
+        else {
             XCTFail("did not receive a thread")
         }
     }
@@ -145,11 +144,10 @@ final class PreconditionTests: XCTestCase {
             ErrorAssertions.preconditionFailure()
         }
         
-        do {
-            let receivedThread = try XCTUnwrap(thread)
+        if let receivedThread = thread {
             XCTAssertTrue(receivedThread.isCancelled)
         }
-        catch {
+        else {
             XCTFail("did not receive a thread")
         }
     }

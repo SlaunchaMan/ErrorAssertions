@@ -130,11 +130,10 @@ final class AssertTests: XCTestCase {
             assert(false)
         }
         
-        do {
-            let receivedThread = try XCTUnwrap(thread)
+        if let receivedThread = thread {
             XCTAssertTrue(receivedThread.isCancelled)
         }
-        catch {
+        else {
             XCTFail("did not receive a thread")
         }
     }
@@ -147,11 +146,10 @@ final class AssertTests: XCTestCase {
             assertionFailure()
         }
         
-        do {
-            let receivedThread = try XCTUnwrap(thread)
+        if let receivedThread = thread {
             XCTAssertTrue(receivedThread.isCancelled)
         }
-        catch {
+        else {
             XCTFail("did not receive a thread")
         }
     }

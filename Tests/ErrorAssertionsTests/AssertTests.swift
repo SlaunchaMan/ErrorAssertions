@@ -7,7 +7,7 @@
 
 import XCTest
 
-import ErrorAssertions
+@testable import ErrorAssertions
 import ErrorAssertionExpectations
 
 final class AssertTests: XCTestCase {
@@ -189,6 +189,19 @@ final class AssertTests: XCTestCase {
         }
     }
     
+    func testAssertionMethodsAreReplacedAfterTestFinishes() {
+        expectAssertionFailure(expectedError: AnonymousError.blank) {
+            assert(false)
+        }
+        
+        expectAssertionFailure(expectedError: AnonymousError.blank) {
+            assertionFailure()
+        }
+
+        XCTAssertNil(AssertUtilities._assertClosure)
+        XCTAssertNil(AssertUtilities._assertionFailureClosure)
+    }
+    
     static var allTests = [
         ("testAssertionFailuresSendExpectedErrors",
          testAssertionFailuresSendExpectedErrors),
@@ -220,6 +233,9 @@ final class AssertTests: XCTestCase {
         
         ("testAssertionFailureExpectationThreadDies",
          testAssertionFailureExpectationThreadDies),
+        
+        ("testAssertionMethodsAreReplacedAfterTestFinishes",
+         testAssertionMethodsAreReplacedAfterTestFinishes),
         
     ]
     

@@ -47,11 +47,19 @@ public struct AssertUtilities {
     public typealias AssertionFailureClosure =
         (Error, StaticString, UInt) -> ()
     
-    @usableFromInline
-    internal static var assertClosure = defaultAssertClosure
+    @usableFromInline internal static var _assertClosure: AssertClosure?
+    
+    @usableFromInline internal static var assertClosure: AssertClosure {
+        return _assertClosure ?? defaultAssertClosure
+    }
     
     @usableFromInline
-    internal static var assertionFailureClosure = defaultAssertionFailureClosure
+    internal static var _assertionFailureClosure: AssertionFailureClosure?
+    
+    @usableFromInline
+    internal static var assertionFailureClosure: AssertionFailureClosure {
+        return _assertionFailureClosure ?? defaultAssertionFailureClosure
+    }
     
     private static let defaultAssertClosure = {
         (condition: Bool, error: Error, file: StaticString, line: UInt) in
@@ -68,28 +76,26 @@ public struct AssertUtilities {
                                line: line)
     }
     
-    #if DEBUG
     static public func replaceAssert(
         with closure: @escaping AssertClosure
     ) -> RestorationHandler {
-        assertClosure = closure
+        _assertClosure = closure
         return restoreAssert
     }
     
     static private func restoreAssert() {
-        assertClosure = AssertUtilities.defaultAssertClosure
+        _assertClosure = nil
     }
     
     static public func replaceAssertionFailure(
         with closure: @escaping AssertionFailureClosure
     ) -> RestorationHandler {
-        assertionFailureClosure = closure
+        _assertionFailureClosure = closure
         return restoreAssertionFailure
     }
     
     static private func restoreAssertionFailure() {
-        assertionFailureClosure = AssertUtilities.defaultAssertionFailureClosure
+        _assertionFailureClosure = nil
     }
-    #endif
     
 }

@@ -59,12 +59,17 @@ extension XCTestCase {
         line: UInt = #line,
         testcase: @escaping () -> Void
     ) where T: Equatable {
+        let equalityExpectation = expectation(
+            description: "The error was equal to the expected value"
+        )
+        
         wrapWithAssertions(testcase, timeout: timeout) { error in
-            XCTAssertEqual(error as? T,
-                           expectedError,
-                           file: file,
-                           line: line)
+            if let error = error as? T, error == expectedError {
+                equalityExpectation.fulfill()
+            }
         }
+        
+        wait(for: [equalityExpectation], timeout: timeout)
     }
     
     /// Executes the `testcase` closure and expects it to produce a specific

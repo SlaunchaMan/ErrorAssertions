@@ -12,69 +12,105 @@ import XCTest
 final class PreconditionTests: XCTestCase {
     
     func testPreconditionFailuresSendExpectedErrors() {
-        expectPreconditionFailure(expectedError: TestError.testErrorA) { 
+        var testcaseExecutionCount = 0
+
+        expectPreconditionFailure(expectedError: TestError.testErrorA) {
+            testcaseExecutionCount += 1
             precondition(false, error: TestError.testErrorA)
         }
         
         expectPreconditionFailure(expectedError: TestError.testErrorB) { 
+            testcaseExecutionCount += 1
             precondition(false, error: TestError.testErrorB)
         }
 
         expectPreconditionFailure(expectedError: TestError.testErrorA) { 
+            testcaseExecutionCount += 1
             preconditionFailure(error: TestError.testErrorA)
         }
         
         expectPreconditionFailure(expectedError: TestError.testErrorB) { 
+            testcaseExecutionCount += 1
             preconditionFailure(error: TestError.testErrorB)
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 4)
     }
     
     func testDefaultErrorIsABlankAnonymousError() {
-        expectPreconditionFailure(expectedError: AnonymousError.blank) { 
+        var testcaseExecutionCount = 0
+
+        expectPreconditionFailure(expectedError: AnonymousError.blank) {
+            testcaseExecutionCount += 1
             precondition(false)
         }
 
         expectPreconditionFailure(expectedError: AnonymousError.blank) { 
-            preconditionFailure()
+            testcaseExecutionCount += 1
+            ErrorAssertions.preconditionFailure()
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testDefaultErrorWithStringIsAnAnonymousError() {
+        var testcaseExecutionCount = 0
+
         let expectedError = AnonymousError.withMessage("test")
         
         expectPreconditionFailure(expectedError: expectedError) { 
+            testcaseExecutionCount += 1
             precondition(false, "test")
         }
 
         expectPreconditionFailure(expectedError: expectedError) { 
-            preconditionFailure("test")
+            testcaseExecutionCount += 1
+            ErrorAssertions.preconditionFailure("test")
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testPreconditionFailureWithoutCapturingError() {
+        var testcaseExecutionCount = 0
+
         expectPreconditionFailure {
+            testcaseExecutionCount += 1
             precondition(false)
         }
 
         expectPreconditionFailure {
-            preconditionFailure()
+            testcaseExecutionCount += 1
+            ErrorAssertions.preconditionFailure()
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testPreconditionFailureWithMessageWithoutCapturingError() {
+        var testcaseExecutionCount = 0
+
         expectPreconditionFailure(expectedMessage: "test") {
+            testcaseExecutionCount += 1
             precondition(false, "test")
         }
 
         expectPreconditionFailure(expectedMessage: "test") {
-            preconditionFailure("test")
+            testcaseExecutionCount += 1
+            ErrorAssertions.preconditionFailure("test")
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testExpectingNoPreconditionFailure() {
+        var testcaseDidExecute = false
+        
         expectNoPreconditionFailure {
-            
+            testcaseDidExecute = true
         }
+        
+        XCTAssertTrue(testcaseDidExecute)
     }
     
     func testPreconditionsDoNotContinueExecution() {

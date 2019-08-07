@@ -12,45 +12,74 @@ import XCTest
 final class FatalErrorTests: XCTestCase {
     
     func testFatalErrorsSendExpectedErrors() {
-        expectFatalError(expectedError: TestError.testErrorA) { 
+        var testcaseExecutionCount = 0
+        
+        expectFatalError(expectedError: TestError.testErrorA) {
+            testcaseExecutionCount += 1
             fatalError(TestError.testErrorA)
         }
         
-        expectFatalError(expectedError: TestError.testErrorB) { 
+        expectFatalError(expectedError: TestError.testErrorB) {
+            testcaseExecutionCount += 1
             fatalError(TestError.testErrorB)
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testDefaultErrorIsABlankAnonymousError() {
-        expectFatalError(expectedError: AnonymousError.blank) { 
+        var testcaseDidExecute = false
+        
+        expectFatalError(expectedError: AnonymousError.blank) {
+            testcaseDidExecute = true
             fatalError()
         }
+        
+        XCTAssertTrue(testcaseDidExecute)
     }
     
     func testDefaultErrorWithStringIsAnAnonymousError() {
+        var testcaseDidExecute = false
         let expectedError = AnonymousError.withMessage("test")
         
         expectFatalError(expectedError: expectedError) { 
+            testcaseDidExecute = true
             fatalError("test")
         }
+
+        XCTAssertTrue(testcaseDidExecute)
     }
     
     func testFatalErrorWithoutCapturingError() {
+        var testcaseDidExecute = false
+
         expectFatalError {
+            testcaseDidExecute = true
             fatalError()
         }
+
+        XCTAssertTrue(testcaseDidExecute)
     }
     
     func testFatalErrorWithMessageWithoutCapturingError() {
+        var testcaseDidExecute = false
+
         expectFatalError(expectedMessage: "test") {
+            testcaseDidExecute = true
             fatalError("test")
         }
+
+        XCTAssertTrue(testcaseDidExecute)
     }
     
     func testExpectingNoFatalError() {
-        expectNoFatalError {
+        var testcaseDidExecute = false
 
+        expectNoFatalError {
+            testcaseDidExecute = true
         }
+
+        XCTAssertTrue(testcaseDidExecute)
     }
     
     func testFatalErrorsDoNotContinueExecution() {

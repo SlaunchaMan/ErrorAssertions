@@ -13,70 +13,105 @@ import ErrorAssertionExpectations
 final class AssertTests: XCTestCase {
     
     func testAssertionFailuresSendExpectedErrors() {
+        var testcaseExecutionCount = 0
+        
         expectAssertionFailure(expectedError: TestError.testErrorA) { 
+            testcaseExecutionCount += 1
             assert(false, error: TestError.testErrorA)
         }
         
         expectAssertionFailure(expectedError: TestError.testErrorB) { 
+            testcaseExecutionCount += 1
             assert(false, error: TestError.testErrorB)
         }
         
         expectAssertionFailure(expectedError: TestError.testErrorA) {
+            testcaseExecutionCount += 1
             assertionFailure(error: TestError.testErrorA)
         }
         
         expectAssertionFailure(expectedError: TestError.testErrorB) { 
+            testcaseExecutionCount += 1
             assertionFailure(error: TestError.testErrorB)
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 4)
     }
     
     func testDefaultErrorIsABlankAnonymousError() {
-        expectAssertionFailure(expectedError: AnonymousError.blank) { 
+        var testcaseExecutionCount = 0
+
+        expectAssertionFailure(expectedError: AnonymousError.blank) {
+            testcaseExecutionCount += 1
             assert(false)
         }
         
         expectAssertionFailure(expectedError: AnonymousError.blank) { 
+            testcaseExecutionCount += 1
             assertionFailure()
         }
+        
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testDefaultErrorWithStringIsAnAnonymousError() {
+        var testcaseExecutionCount = 0
+
         let expectedError = AnonymousError.withMessage("test")
         
         expectAssertionFailure(expectedError: expectedError) { 
+            testcaseExecutionCount += 1
             assert(false, "test")
         }
         
         expectAssertionFailure(expectedError: expectedError) { 
+            testcaseExecutionCount += 1
             assertionFailure("test")
         }
+
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testAssertionFailureWithoutCapturingError() {
+        var testcaseExecutionCount = 0
+
         expectAssertionFailure {
+            testcaseExecutionCount += 1
             assert(false)
         }
         
         expectAssertionFailure {
+            testcaseExecutionCount += 1
             assertionFailure()
         }
         
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testAssertionFailureWithMessageWithoutCapturingError() {
+        var testcaseExecutionCount = 0
+
         expectAssertionFailure(expectedMessage: "test") {
+            testcaseExecutionCount += 1
             assert(false, "test")
         }
         
         expectAssertionFailure(expectedMessage: "test") {
+            testcaseExecutionCount += 1
             assertionFailure("test")
         }
+
+        XCTAssertEqual(testcaseExecutionCount, 2)
     }
     
     func testExpectingNoAssertionFailure() {
+        var testcaseDidExecute = false
+        
         expectNoAssertionFailure {
-            
+            testcaseDidExecute = true
         }
+        
+        XCTAssertTrue(testcaseDidExecute)
     }
     
     func testAssertionsDoNotContinueExecution() {

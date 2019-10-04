@@ -6,16 +6,12 @@ let package = Package(
     products: [
         .library(name: "ErrorAssertions", targets: ["ErrorAssertions"]),
         .library(name: "ErrorAssertionExpectations",
-                 targets: [
-                    "ErrorAssertionExpectations",
-            ]),
+                 targets: ["ErrorAssertionExpectations"]),
     ],
     targets: [
         .target(name: "ErrorAssertions", dependencies: []),
         .target(name: "ErrorAssertionExpectations",
-                dependencies: [
-                    "ErrorAssertions",
-            ]),
+                dependencies: ["ErrorAssertions"]),
         .testTarget(name: "ErrorAssertionsTests",
                     dependencies: [
                         "ErrorAssertions",

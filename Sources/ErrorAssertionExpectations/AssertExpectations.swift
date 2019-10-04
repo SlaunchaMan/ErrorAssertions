@@ -11,7 +11,9 @@ import ErrorAssertions
 
 extension XCTestCase {
     
-    private func replaceAssert(_ handler: @escaping (Error) -> Void) -> RestorationHandler {
+    private func replaceAssert(
+        _ handler: @escaping (Error) -> Void
+    ) -> RestorationHandler {
         var restorationHandlers: [RestorationHandler] = []
         
         restorationHandlers.append(
@@ -51,10 +53,9 @@ extension XCTestCase {
         
         let thread = ClosureThread(testcase)
         thread.start()
+        defer { thread.cancel() }
         
         wait(for: [expectation], timeout: timeout)
-
-        thread.cancel()
     }
     
     /// Executes the `testcase` closure and expects it to produce a specific
@@ -171,10 +172,9 @@ extension XCTestCase {
         }
         
         thread.start()
+        defer { thread.cancel() }
         
         wait(for: [expectation], timeout: timeout)
-        
-        thread.cancel()
     }
     
 }

@@ -8,6 +8,7 @@
 import XCTest
 
 @testable import ErrorAssertions
+import ErrorAssertionExpectations
 
 final class PreconditionTests: XCTestCase {
     
@@ -16,22 +17,22 @@ final class PreconditionTests: XCTestCase {
 
         expectPreconditionFailure(expectedError: TestError.testErrorA) {
             testcaseExecutionCount += 1
-            precondition(false, error: TestError.testErrorA)
+            ErrorAssertions.precondition(false, error: TestError.testErrorA)
         }
         
         expectPreconditionFailure(expectedError: TestError.testErrorB) { 
             testcaseExecutionCount += 1
-            precondition(false, error: TestError.testErrorB)
+            ErrorAssertions.precondition(false, error: TestError.testErrorB)
         }
 
         expectPreconditionFailure(expectedError: TestError.testErrorA) { 
             testcaseExecutionCount += 1
-            preconditionFailure(error: TestError.testErrorA)
+            ErrorAssertions.preconditionFailure(error: TestError.testErrorA)
         }
         
         expectPreconditionFailure(expectedError: TestError.testErrorB) { 
             testcaseExecutionCount += 1
-            preconditionFailure(error: TestError.testErrorB)
+            ErrorAssertions.preconditionFailure(error: TestError.testErrorB)
         }
         
         XCTAssertEqual(testcaseExecutionCount, 4)
@@ -42,7 +43,7 @@ final class PreconditionTests: XCTestCase {
 
         expectPreconditionFailure(expectedError: AnonymousError.blank) {
             testcaseExecutionCount += 1
-            precondition(false)
+            ErrorAssertions.precondition(false)
         }
 
         expectPreconditionFailure(expectedError: AnonymousError.blank) { 
@@ -60,7 +61,7 @@ final class PreconditionTests: XCTestCase {
         
         expectPreconditionFailure(expectedError: expectedError) { 
             testcaseExecutionCount += 1
-            precondition(false, "test")
+            ErrorAssertions.precondition(false, "test")
         }
 
         expectPreconditionFailure(expectedError: expectedError) { 
@@ -76,7 +77,7 @@ final class PreconditionTests: XCTestCase {
 
         expectPreconditionFailure {
             testcaseExecutionCount += 1
-            precondition(false)
+            ErrorAssertions.precondition(false)
         }
 
         expectPreconditionFailure {
@@ -92,7 +93,7 @@ final class PreconditionTests: XCTestCase {
 
         expectPreconditionFailure(expectedMessage: "test") {
             testcaseExecutionCount += 1
-            precondition(false, "test")
+            ErrorAssertions.precondition(false, "test")
         }
 
         expectPreconditionFailure(expectedMessage: "test") {
@@ -113,7 +114,7 @@ final class PreconditionTests: XCTestCase {
         XCTAssertTrue(testcaseDidExecute)
     }
     
-    func testPreconditionsDoNotContinueExecution() {
+    func testPreconditionsThatFailDoNotContinueExecution() {
         let expectation = self.expectation(description:
             "The code after the precondition should not execute"
         )
@@ -121,7 +122,7 @@ final class PreconditionTests: XCTestCase {
         expectation.isInverted = true
         
         expectPreconditionFailure {
-            precondition(false)
+            ErrorAssertions.precondition(false)
             expectation.fulfill()
         }
         
@@ -130,26 +131,33 @@ final class PreconditionTests: XCTestCase {
     
     func testPreconditionFailuresDoNotContinueExecution() {
         let expectation = self.expectation(description:
-            "The code after the precondition should not execute"
+            "The code after the precondition failure should not execute"
         )
         
         expectation.isInverted = true
         
         expectPreconditionFailure {
+            defer {
+                // This will never actually execute, as `preconditionFailure()`
+                // returns `Never`. But the code can’t go after that line, or
+                // the compiler will (rightly) recognize that the code will
+                // never execute. Putting it in a `defer` block seems to avoid
+                // that inspection.
+                expectation.fulfill()
+            }
             ErrorAssertions.preconditionFailure()
-            expectation.fulfill()
         }
         
         waitForExpectations(timeout: 1)
     }
     
-    func testPreconditionsDoContinueExecution() {
+    func testPreconditionsThatSucceedDoContinueExecution() {
         let expectation = self.expectation(description:
             "The code after the assert executed"
         )
         
         expectNoPreconditionFailure {
-            precondition(true)
+            ErrorAssertions.precondition(true)
             expectation.fulfill()
         }
         
@@ -161,7 +169,7 @@ final class PreconditionTests: XCTestCase {
         
         expectPreconditionFailure {
             thread = Thread.current
-            precondition(false)
+            ErrorAssertions.precondition(false)
         }
         
         if let receivedThread = thread {
@@ -188,6 +196,45 @@ final class PreconditionTests: XCTestCase {
         }
     }
     
+    func testNoPreconditionFailureExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectNoPreconditionFailure {
+            thread = Thread.current
+            ErrorAssertions.precondition(true)
+        }
+        
+        if let receivedThread = thread {
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        else {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
+    func testPreconditionMethodsAreReplacedAfterTestFinishes() {
+        expectPreconditionFailure {
+            ErrorAssertions.precondition(false)
+        }
+        
+        XCTAssertNil(PreconditionUtilities._preconditionClosure)
+        XCTAssertNil(PreconditionUtilities._preconditionFailureClosure)
+        
+        expectPreconditionFailure {
+            ErrorAssertions.preconditionFailure()
+        }
+
+        XCTAssertNil(PreconditionUtilities._preconditionClosure)
+        XCTAssertNil(PreconditionUtilities._preconditionFailureClosure)
+
+        expectNoPreconditionFailure {
+            ErrorAssertions.precondition(true)
+        }
+        
+        XCTAssertNil(PreconditionUtilities._preconditionClosure)
+        XCTAssertNil(PreconditionUtilities._preconditionFailureClosure)
+    }
+    
     static var allTests = [
         ("testPreconditionFailuresSendExpectedErrors",
          testPreconditionFailuresSendExpectedErrors),
@@ -207,20 +254,26 @@ final class PreconditionTests: XCTestCase {
         ("testExpectingNoPreconditionFailure",
          testExpectingNoPreconditionFailure),
         
-        ("testPreconditionsDoNotContinueExecution",
-         testPreconditionsDoNotContinueExecution),
+        ("testPreconditionsThatFailDoNotContinueExecution",
+         testPreconditionsThatFailDoNotContinueExecution),
         
         ("testPreconditionFailuresDoNotContinueExecution",
          testPreconditionFailuresDoNotContinueExecution),
         
-        ("testPreconditionsDoContinueExecution",
-         testPreconditionsDoContinueExecution),
+        ("testPreconditionsThatSucceedDoContinueExecution",
+         testPreconditionsThatSucceedDoContinueExecution),
         
         ("testPreconditionExpectationThreadDies",
          testPreconditionExpectationThreadDies),
         
         ("testPreconditionFailureExpectationThreadDies",
          testPreconditionFailureExpectationThreadDies),
+        
+        ("testNoPreconditionFailureExpectationThreadDies",
+         testNoPreconditionFailureExpectationThreadDies),
+        
+        ("testPreconditionMethodsAreReplacedAfterTestFinishes",
+         testPreconditionMethodsAreReplacedAfterTestFinishes)
     ]
     
 }

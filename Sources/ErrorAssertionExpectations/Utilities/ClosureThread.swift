@@ -7,16 +7,16 @@
 
 import Foundation
 
-class ClosureThread: Thread {
+internal final class ClosureThread: Thread {
     
-    let closure: () -> Void
+    private let closure: () -> Void
     
-    init(_ closure: @escaping () -> Void) {
+    internal init(_ closure: @escaping () -> Void) {
         self.closure = closure
         super.init()
     }
     
-    override func main() {
+    internal override func main() {
         closure()
     }
     

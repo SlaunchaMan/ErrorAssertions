@@ -40,20 +40,19 @@ public func assertionFailure(_ message: @autoclosure () -> String = String(),
                      line: line)
 }
 
-public struct AssertUtilities {
+public enum AssertUtilities {
     
     public typealias AssertClosure = (Bool, Error, StaticString, UInt) -> ()
     
     public typealias AssertionFailureClosure =
         (Error, StaticString, UInt) -> ()
     
-    @usableFromInline internal static var _assertClosure: AssertClosure?
+    internal static var _assertClosure: AssertClosure?
     
     @usableFromInline internal static var assertClosure: AssertClosure {
         return _assertClosure ?? defaultAssertClosure
     }
     
-    @usableFromInline
     internal static var _assertionFailureClosure: AssertionFailureClosure?
     
     @usableFromInline

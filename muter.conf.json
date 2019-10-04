@@ -3,7 +3,7 @@
     "test"
   ],
   "exclude" : [
-
+    "Package.swift"
   ],
   "executable" : "/usr/bin/swift",
   "arguments": ["test"]

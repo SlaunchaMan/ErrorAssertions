@@ -17,22 +17,22 @@ final class AssertTests: XCTestCase {
         
         expectAssertionFailure(expectedError: TestError.testErrorA) { 
             testcaseExecutionCount += 1
-            assert(false, error: TestError.testErrorA)
+            ErrorAssertions.assert(false, error: TestError.testErrorA)
         }
         
         expectAssertionFailure(expectedError: TestError.testErrorB) { 
             testcaseExecutionCount += 1
-            assert(false, error: TestError.testErrorB)
+            ErrorAssertions.assert(false, error: TestError.testErrorB)
         }
         
         expectAssertionFailure(expectedError: TestError.testErrorA) {
             testcaseExecutionCount += 1
-            assertionFailure(error: TestError.testErrorA)
+            ErrorAssertions.assertionFailure(error: TestError.testErrorA)
         }
         
         expectAssertionFailure(expectedError: TestError.testErrorB) { 
             testcaseExecutionCount += 1
-            assertionFailure(error: TestError.testErrorB)
+            ErrorAssertions.assertionFailure(error: TestError.testErrorB)
         }
         
         XCTAssertEqual(testcaseExecutionCount, 4)
@@ -43,12 +43,12 @@ final class AssertTests: XCTestCase {
 
         expectAssertionFailure(expectedError: AnonymousError.blank) {
             testcaseExecutionCount += 1
-            assert(false)
+            ErrorAssertions.assert(false)
         }
         
         expectAssertionFailure(expectedError: AnonymousError.blank) { 
             testcaseExecutionCount += 1
-            assertionFailure()
+            ErrorAssertions.assertionFailure()
         }
         
         XCTAssertEqual(testcaseExecutionCount, 2)
@@ -61,12 +61,12 @@ final class AssertTests: XCTestCase {
         
         expectAssertionFailure(expectedError: expectedError) { 
             testcaseExecutionCount += 1
-            assert(false, "test")
+            ErrorAssertions.assert(false, "test")
         }
         
         expectAssertionFailure(expectedError: expectedError) { 
             testcaseExecutionCount += 1
-            assertionFailure("test")
+            ErrorAssertions.assertionFailure("test")
         }
 
         XCTAssertEqual(testcaseExecutionCount, 2)
@@ -77,12 +77,12 @@ final class AssertTests: XCTestCase {
 
         expectAssertionFailure {
             testcaseExecutionCount += 1
-            assert(false)
+            ErrorAssertions.assert(false)
         }
         
         expectAssertionFailure {
             testcaseExecutionCount += 1
-            assertionFailure()
+            ErrorAssertions.assertionFailure()
         }
         
         XCTAssertEqual(testcaseExecutionCount, 2)
@@ -93,12 +93,12 @@ final class AssertTests: XCTestCase {
 
         expectAssertionFailure(expectedMessage: "test") {
             testcaseExecutionCount += 1
-            assert(false, "test")
+            ErrorAssertions.assert(false, "test")
         }
         
         expectAssertionFailure(expectedMessage: "test") {
             testcaseExecutionCount += 1
-            assertionFailure("test")
+            ErrorAssertions.assertionFailure("test")
         }
 
         XCTAssertEqual(testcaseExecutionCount, 2)
@@ -122,7 +122,7 @@ final class AssertTests: XCTestCase {
         expectation.isInverted = true
         
         expectAssertionFailure {
-            assert(false)
+            ErrorAssertions.assert(false)
             expectation.fulfill()
         }
         
@@ -131,13 +131,13 @@ final class AssertTests: XCTestCase {
     
     func testAssertionFailuresDoNotContinueExecution() {
         let expectation = self.expectation(description:
-            "The code after the assert should not execute"
+            "The code after the assertion failure should not execute"
         )
         
         expectation.isInverted = true
         
         expectAssertionFailure {
-            assertionFailure()
+            ErrorAssertions.assertionFailure()
             expectation.fulfill()
         }
         
@@ -150,7 +150,7 @@ final class AssertTests: XCTestCase {
         )
         
         expectNoAssertionFailure {
-            assert(true)
+            ErrorAssertions.assert(true)
             expectation.fulfill()
         }
         
@@ -162,7 +162,7 @@ final class AssertTests: XCTestCase {
         
         expectAssertionFailure {
             thread = Thread.current
-            assert(false)
+            ErrorAssertions.assert(false)
         }
         
         if let receivedThread = thread {
@@ -178,7 +178,23 @@ final class AssertTests: XCTestCase {
         
         expectAssertionFailure {
             thread = Thread.current
-            assertionFailure()
+            ErrorAssertions.assertionFailure()
+        }
+        
+        if let receivedThread = thread {
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        else {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
+    func testNoAssertionFailureExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectNoAssertionFailure {
+            thread = Thread.current
+            ErrorAssertions.assert(true)
         }
         
         if let receivedThread = thread {
@@ -190,14 +206,24 @@ final class AssertTests: XCTestCase {
     }
     
     func testAssertionMethodsAreReplacedAfterTestFinishes() {
-        expectAssertionFailure(expectedError: AnonymousError.blank) {
-            assert(false)
+        expectAssertionFailure {
+            ErrorAssertions.assert(false)
         }
         
-        expectAssertionFailure(expectedError: AnonymousError.blank) {
-            assertionFailure()
+        XCTAssertNil(AssertUtilities._assertClosure)
+        XCTAssertNil(AssertUtilities._assertionFailureClosure)
+        
+        expectAssertionFailure {
+            ErrorAssertions.assertionFailure()
         }
 
+        XCTAssertNil(AssertUtilities._assertClosure)
+        XCTAssertNil(AssertUtilities._assertionFailureClosure)
+
+        expectNoAssertionFailure {
+            ErrorAssertions.assert(true)
+        }
+        
         XCTAssertNil(AssertUtilities._assertClosure)
         XCTAssertNil(AssertUtilities._assertionFailureClosure)
     }
@@ -233,6 +259,9 @@ final class AssertTests: XCTestCase {
         
         ("testAssertionFailureExpectationThreadDies",
          testAssertionFailureExpectationThreadDies),
+        
+        ("testNoAssertionFailureExpectationThreadDies",
+         testNoAssertionFailureExpectationThreadDies),
         
         ("testAssertionMethodsAreReplacedAfterTestFinishes",
          testAssertionMethodsAreReplacedAfterTestFinishes),

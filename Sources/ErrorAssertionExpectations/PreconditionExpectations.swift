@@ -11,11 +11,14 @@ import ErrorAssertions
 
 extension XCTestCase {
     
-    private func replacePrecondition(_ handler: @escaping (Error) -> Void) -> RestorationHandler {
+    private func replacePrecondition(
+        _ handler: @escaping (Error) -> Void
+    ) -> RestorationHandler {
         var restorationHandlers: [() -> Void] = []
         
         restorationHandlers.append(
-            PreconditionUtilities.replacePrecondition { condition, error, _, _ in
+            PreconditionUtilities.replacePrecondition {
+                condition, error, _, _ in
                 if !condition {
                     handler(error)
                     unreachable()
@@ -51,10 +54,9 @@ extension XCTestCase {
         
         let thread = ClosureThread(testcase)
         thread.start()
+        defer { thread.cancel() }
         
         wait(for: [expectation], timeout: timeout)
-        
-        thread.cancel()
     }
     
     /// Executes the `testcase` closure and expects it to produce a specific
@@ -171,10 +173,9 @@ extension XCTestCase {
         }
         
         thread.start()
+        defer { thread.cancel() }
         
         wait(for: [expectation], timeout: timeout)
-        
-        thread.cancel()
     }
     
 }

@@ -8,6 +8,7 @@
 import XCTest
 
 @testable import ErrorAssertions
+import ErrorAssertionExpectations
 
 final class FatalErrorTests: XCTestCase {
     
@@ -16,12 +17,12 @@ final class FatalErrorTests: XCTestCase {
         
         expectFatalError(expectedError: TestError.testErrorA) {
             testcaseExecutionCount += 1
-            fatalError(TestError.testErrorA)
+            ErrorAssertions.fatalError(TestError.testErrorA)
         }
         
         expectFatalError(expectedError: TestError.testErrorB) {
             testcaseExecutionCount += 1
-            fatalError(TestError.testErrorB)
+            ErrorAssertions.fatalError(TestError.testErrorB)
         }
         
         XCTAssertEqual(testcaseExecutionCount, 2)
@@ -32,7 +33,7 @@ final class FatalErrorTests: XCTestCase {
         
         expectFatalError(expectedError: AnonymousError.blank) {
             testcaseDidExecute = true
-            fatalError()
+            ErrorAssertions.fatalError()
         }
         
         XCTAssertTrue(testcaseDidExecute)
@@ -44,7 +45,7 @@ final class FatalErrorTests: XCTestCase {
         
         expectFatalError(expectedError: expectedError) { 
             testcaseDidExecute = true
-            fatalError("test")
+            ErrorAssertions.fatalError("test")
         }
 
         XCTAssertTrue(testcaseDidExecute)
@@ -55,7 +56,7 @@ final class FatalErrorTests: XCTestCase {
 
         expectFatalError {
             testcaseDidExecute = true
-            fatalError()
+            ErrorAssertions.fatalError()
         }
 
         XCTAssertTrue(testcaseDidExecute)
@@ -66,7 +67,7 @@ final class FatalErrorTests: XCTestCase {
 
         expectFatalError(expectedMessage: "test") {
             testcaseDidExecute = true
-            fatalError("test")
+            ErrorAssertions.fatalError("test")
         }
 
         XCTAssertTrue(testcaseDidExecute)
@@ -91,7 +92,7 @@ final class FatalErrorTests: XCTestCase {
         
         expectFatalError {
             defer { expectation.fulfill() }
-            fatalError()
+            ErrorAssertions.fatalError()
         }
         
         waitForExpectations(timeout: 1)
@@ -102,7 +103,7 @@ final class FatalErrorTests: XCTestCase {
         
         expectFatalError {
             thread = Thread.current
-            fatalError()
+            ErrorAssertions.fatalError()
         }
         
         if let receivedThread = thread {
@@ -113,6 +114,35 @@ final class FatalErrorTests: XCTestCase {
         }
     }
     
+    func testNoFatalErrorExpectationThreadDies() {
+        var thread: Thread?
+        
+        expectNoFatalError {
+            thread = Thread.current
+        }
+        
+        if let receivedThread = thread {
+            XCTAssertTrue(receivedThread.isCancelled)
+        }
+        else {
+            XCTFail("did not receive a thread")
+        }
+    }
+    
+    func testFatalErrorMethodsAreReplacedAfterTestFinishes() {
+        expectFatalError {
+            ErrorAssertions.fatalError()
+        }
+        
+        XCTAssertNil(FatalErrorUtilities._fatalErrorClosure)
+        
+        expectNoFatalError {
+            
+        }
+
+        XCTAssertNil(FatalErrorUtilities._fatalErrorClosure)
+    }
+
     static var allTests = [
         ("testFatalErrorsSendExpectedErrors",
          testFatalErrorsSendExpectedErrors),
@@ -136,6 +166,12 @@ final class FatalErrorTests: XCTestCase {
         
         ("testFatalErrorExpectationThreadDies",
          testFatalErrorExpectationThreadDies),
+        
+        ("testNoFatalErrorExpectationThreadDies",
+         testNoFatalErrorExpectationThreadDies),
+        
+        ("testFatalErrorMethodsAreReplacedAfterTestFinishes",
+         testFatalErrorMethodsAreReplacedAfterTestFinishes)
     ]
     
 }

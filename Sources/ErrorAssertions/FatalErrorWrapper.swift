@@ -21,12 +21,15 @@ public func fatalError(_ message: @autoclosure () -> String = String(),
                line: line)
 }
 
-public struct FatalErrorUtilities {
+public enum FatalErrorUtilities {
     
     public typealias FatalErrorClosure = (Error, StaticString, UInt) -> Never
     
-    @usableFromInline
-    internal static var fatalErrorClosure = defaultFatalErrorClosure
+    internal static var _fatalErrorClosure: FatalErrorClosure?
+        
+    @usableFromInline internal static var fatalErrorClosure: FatalErrorClosure {
+        return _fatalErrorClosure ?? defaultFatalErrorClosure
+    }
     
     private static let defaultFatalErrorClosure = {
         (error: Error, file: StaticString, line: UInt) -> Never in
@@ -35,17 +38,15 @@ public struct FatalErrorUtilities {
                          line: line)
     }
     
-    #if DEBUG
     static public func replaceFatalError(
-        closure: @escaping FatalErrorClosure
+        with closure: @escaping FatalErrorClosure
     ) -> RestorationHandler {
-        fatalErrorClosure = closure
+        _fatalErrorClosure = closure
         return restoreFatalError
     }
     
     static private func restoreFatalError() {
-        fatalErrorClosure = defaultFatalErrorClosure
+        _fatalErrorClosure = nil
     }
-    #endif
     
 }

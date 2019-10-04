@@ -11,7 +11,9 @@ import ErrorAssertions
 
 extension XCTestCase {
     
-    private func replaceFatalError(_ handler: @escaping (Error) -> Void) -> RestorationHandler {
+    private func replaceFatalError(
+        _ handler: @escaping (Error) -> Void
+    ) -> RestorationHandler {
         return FatalErrorUtilities.replaceFatalError { error, _, _ in
             handler(error)
             unreachable()
@@ -154,10 +156,9 @@ extension XCTestCase {
         }
         
         thread.start()
+        defer { thread.cancel() }
         
         wait(for: [expectation], timeout: timeout)
-        
-        thread.cancel()
     }
     
 }

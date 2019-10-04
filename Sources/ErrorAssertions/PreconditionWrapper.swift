@@ -27,20 +27,20 @@ public func precondition(_ condition: @autoclosure () -> Bool,
 @inlinable
 public func preconditionFailure(error: Error,
                                 file: StaticString = #file,
-                                line: UInt = #line) {
+                                line: UInt = #line) -> Never {
     PreconditionUtilities.preconditionFailureClosure(error, file, line)
 }
 
 @inlinable
 public func preconditionFailure(_ message: @autoclosure () -> String = String(),
                                 file: StaticString = #file,
-                                line: UInt = #line) {
+                                line: UInt = #line) -> Never {
     preconditionFailure(error: AnonymousError(string: message()),
                         file: file,
                         line: line)
 }
 
-public struct PreconditionUtilities {
+public enum PreconditionUtilities {
     
     public typealias PreconditionClosure =
         (Bool, Error, StaticString, UInt) -> ()
@@ -48,12 +48,19 @@ public struct PreconditionUtilities {
     public typealias PreconditionFailureClosure = 
         (Error, StaticString, UInt) -> Never
     
-    @usableFromInline
-    internal static var preconditionClosure = defaultPreconditionClosure
+    internal static var _preconditionClosure: PreconditionClosure?
     
     @usableFromInline
-    internal static var preconditionFailureClosure =
-    defaultPreconditionFailureClosure
+    internal static var preconditionClosure: PreconditionClosure {
+        return _preconditionClosure ?? defaultPreconditionClosure
+    }
+    
+    internal static var _preconditionFailureClosure: PreconditionFailureClosure?
+        
+    @usableFromInline
+    internal static var preconditionFailureClosure: PreconditionFailureClosure {
+        return _preconditionFailureClosure ?? defaultPreconditionFailureClosure
+    }
     
     private static let defaultPreconditionClosure = {
         (condition: Bool, error: Error, file: StaticString, line: UInt) in
@@ -70,29 +77,26 @@ public struct PreconditionUtilities {
                                   line: line)
     }
     
-    #if DEBUG
     static public func replacePrecondition(
-        closure: @escaping PreconditionClosure
+        with closure: @escaping PreconditionClosure
     ) -> RestorationHandler {
-        preconditionClosure = closure
+        _preconditionClosure = closure
         return restorePrecondition
     }
     
     static private func restorePrecondition() {
-        preconditionClosure = defaultPreconditionClosure
+        _preconditionClosure = nil
     }
     
     static public func replacePreconditionFailure(
-        closure: @escaping PreconditionFailureClosure
+        with closure: @escaping PreconditionFailureClosure
     ) -> RestorationHandler {
-        preconditionFailureClosure = closure
+        _preconditionFailureClosure = closure
         return restorePreconditionFailure
     }
     
     static private func restorePreconditionFailure() {
-        preconditionFailureClosure = PreconditionUtilities
-            .defaultPreconditionFailureClosure
+        _preconditionFailureClosure = nil
     }
-    #endif
     
 }

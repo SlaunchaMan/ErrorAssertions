@@ -7,7 +7,7 @@
 
 import Foundation
 
-func unreachable() -> Never {
+internal func unreachable() -> Never {
     repeat {
         RunLoop.current.run()
     } while (true)

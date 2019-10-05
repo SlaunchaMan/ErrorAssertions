@@ -14,27 +14,24 @@ extension XCTestCase {
     private func replacePrecondition(
         _ handler: @escaping (Error) -> Void
     ) -> RestorationHandler {
-        var restorationHandlers: [() -> Void] = []
-        
-        restorationHandlers.append(
+        let preconditionRestorationHandler = 
             PreconditionUtilities.replacePrecondition {
                 condition, error, _, _ in
                 if !condition {
                     handler(error)
                     unreachable()
                 }
-            }
-        )
+        }
         
-        restorationHandlers.append(
+        let preconditionFailureRestorationHandler =
             PreconditionUtilities.replacePreconditionFailure { error, _, _ in
                 handler(error)
                 unreachable()
-            }
-        )
+        }
         
         return {
-            restorationHandlers.forEach { $0() }
+            preconditionRestorationHandler()
+            preconditionFailureRestorationHandler()
         }
     }
     

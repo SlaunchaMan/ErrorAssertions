@@ -14,26 +14,24 @@ extension XCTestCase {
     private func replaceAssert(
         _ handler: @escaping (Error) -> Void
     ) -> RestorationHandler {
-        var restorationHandlers: [RestorationHandler] = []
-        
-        restorationHandlers.append(
-            AssertUtilities.replaceAssert { condition, error, _, _ in
-                if !condition {
-                    handler(error)
-                    unreachable()
-                }
-            }
-        )
-        
-        restorationHandlers.append(
-            AssertUtilities.replaceAssertionFailure { error, _, _ in
+        let assertRestorationHandler = AssertUtilities.replaceAssert {
+            (condition, error, _, _) in
+            if !condition {
                 handler(error)
                 unreachable()
             }
-        )
+        }
+ 
+        let assertionFailureRestorationHandler = 
+            AssertUtilities.replaceAssertionFailure {
+                (error, _, _) in
+                handler(error)
+                unreachable()
+        }
         
         return {
-            restorationHandlers.forEach { $0() }
+            assertRestorationHandler() 
+            assertionFailureRestorationHandler()
         }
     }
     

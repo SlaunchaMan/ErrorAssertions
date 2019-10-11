@@ -1,7 +1,10 @@
 .DS_Store
+build/
 /.build
 /Packages
 /*.xcodeproj
 *.xcuserdatad
 muter_logs/
 docs/
+fastlane/*_docs.json
+fastlane/report.xml

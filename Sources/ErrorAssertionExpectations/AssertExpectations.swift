@@ -7,7 +7,9 @@
 
 import XCTest
 
+#if !COCOAPODS
 import ErrorAssertions
+#endif
 
 extension XCTestCase {
     

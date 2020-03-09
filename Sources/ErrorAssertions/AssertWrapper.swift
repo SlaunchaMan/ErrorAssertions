@@ -5,6 +5,8 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
+import Foundation
+
 @inlinable
 public func assert(_ condition: @autoclosure () -> Bool,
                    error: Error,

@@ -8,10 +8,7 @@
 import XCTest
 
 @testable import ErrorAssertions
-
-#if !COCOAPODS
 import ErrorAssertionExpectations
-#endif
 
 final class PreconditionTests: XCTestCase {
     

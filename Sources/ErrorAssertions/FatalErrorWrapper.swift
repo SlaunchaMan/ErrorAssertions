@@ -38,8 +38,10 @@ public func fatalError(_ message: @autoclosure () -> String = String(),
                line: line)
 }
 
+/// A utility type that replaces the internal implementation of `fatalError()`.
 public enum FatalErrorUtilities {
     
+    /// A closure that handles a fatal error.
     public typealias FatalErrorClosure = (Error, StaticString, UInt) -> Never
     
     internal static var _fatalErrorClosure: FatalErrorClosure?
@@ -55,6 +57,11 @@ public enum FatalErrorUtilities {
                          line: line)
     }
     
+    /// Replaces the internal implementation of `fatalError(_:file:line:)` with
+    /// the given closure. Returns a `RestorationHandler` to execute that
+    /// restores the original implentation.
+    /// - Parameter closure: The closure to execute when
+    ///                      `fatalError(_:file:line:)` is called.
     static public func replaceFatalError(
         with closure: @escaping FatalErrorClosure
     ) -> RestorationHandler {

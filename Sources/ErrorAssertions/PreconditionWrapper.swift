@@ -83,11 +83,15 @@ public func preconditionFailure(_ message: @autoclosure () -> String = String(),
                         line: line)
 }
 
+/// A utility type that replaces the internal implementation of precondition
+/// functions.
 public enum PreconditionUtilities {
     
+    /// A closure that handles a precondition.
     public typealias PreconditionClosure =
         (Bool, Error, StaticString, UInt) -> ()
     
+    /// A closure that handles a precondition failure. 
     public typealias PreconditionFailureClosure = 
         (Error, StaticString, UInt) -> Never
     
@@ -120,6 +124,11 @@ public enum PreconditionUtilities {
                                   line: line)
     }
     
+    /// Replaces the internal implementation of
+    /// `precondition(_:error:file:line:)` with the given closure. Returns a
+    /// `RestorationHandler` to execute that restores the original implentation.
+    /// - Parameter closure: The closure to execute when
+    ///                      `precondition(_:error:file:line:)` is called.
     static public func replacePrecondition(
         with closure: @escaping PreconditionClosure
     ) -> RestorationHandler {
@@ -131,6 +140,12 @@ public enum PreconditionUtilities {
         _preconditionClosure = nil
     }
     
+    /// Replaces the internal implementation of
+    /// `preconditionFailure(error:file:line:)` with the given closure. Returns
+    /// a `RestorationHandler` to execute that restores the original
+    /// implentation.
+    /// - Parameter closure: The closure to execute when
+    ///                      `preconditionFailure(error:file:line:)` is called.
     static public func replacePreconditionFailure(
         with closure: @escaping PreconditionFailureClosure
     ) -> RestorationHandler {

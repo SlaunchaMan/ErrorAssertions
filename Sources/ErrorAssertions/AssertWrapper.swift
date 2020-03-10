@@ -82,10 +82,14 @@ public func assertionFailure(_ message: @autoclosure () -> String = String(),
                      line: line)
 }
 
+/// A utility type that replaces the internal implementation of assertion
+/// functions.
 public enum AssertUtilities {
     
+    /// A closure that handles an assertion.
     public typealias AssertClosure = (Bool, Error, StaticString, UInt) -> ()
     
+    /// A closure that handles an assertion failure.
     public typealias AssertionFailureClosure =
         (Error, StaticString, UInt) -> ()
     
@@ -117,6 +121,11 @@ public enum AssertUtilities {
                                line: line)
     }
     
+    /// Replaces the internal implementation of `assert(_:error:file:line:)`
+    /// with the given closure. Returns a `RestorationHandler` to execute that
+    /// restores the original implentation.
+    /// - Parameter closure: The closure to execute when
+    ///                      `assert(_:error:file:line:)` is called.
     static public func replaceAssert(
         with closure: @escaping AssertClosure
     ) -> RestorationHandler {
@@ -128,6 +137,11 @@ public enum AssertUtilities {
         _assertClosure = nil
     }
     
+    /// Replaces the internal implementation of
+    /// `assertionFailure(error:file:line:)` with the given closure. Returns a
+    /// `RestorationHandler` to execute that restores the original implentation.
+    /// - Parameter closure: The closure to execute when
+    ///                      `assertionFailure(error:file:line:)` is called.
     static public func replaceAssertionFailure(
         with closure: @escaping AssertionFailureClosure
     ) -> RestorationHandler {

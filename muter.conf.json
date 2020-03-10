@@ -1,7 +1,4 @@
 {
-  "arguments" : [
-    "test"
-  ],
   "exclude" : [
     "Package.swift"
   ],

@@ -1,0 +1,30 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  docs:
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Generate Xcode project
+      run: swift package generate-xcodeproj
+      
+    - name: Install Homebrew Dependencies
+      run: brew install sourcekitten jq
+        
+    - name: Parse Project
+      run: |
+        sourcekitten doc --module-name ErrorAssertions -- -project ErrorAssertions.xcodeproj > library_docs.json
+        sourcekitten doc --module-name ErrorAssertionExpectations  -- -project ErrorAssertions.xcodeproj > testhelpers_docs.json
+        jq -s add library_docs.json testhelpers_docs.json > docs.json
+
+    - name: Publish Jazzy Docs
+      uses: Steven0351/publish-jazzy-docs@v1.1.1
+      with:
+        config: .jazzy.yml
+        personal_access_token: ${{ secrets.ACCESS_TOKEN }}

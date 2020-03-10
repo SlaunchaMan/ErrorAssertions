@@ -117,7 +117,7 @@ extension XCTestCase {
             testcase: testcase)
     }
     
-    /// Executes the `testcase` closure and expects it to produce an assertion
+    /// Executes the `testcase` closure and expects it to produce any assertion
     /// failure.
     ///
     /// - Parameters:
@@ -137,7 +137,7 @@ extension XCTestCase {
     }
     
     /// Executes the `testcase` closure and expects it finish without producing
-    /// an assertion failure.
+    /// any assertion failures.
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to finish. Defaults to 2

@@ -102,7 +102,8 @@ extension XCTestCase {
                          testcase: testcase)
     }
     
-    /// Executes the `testcase` closure and expects it to produce a fatal error.
+    /// Executes the `testcase` closure and expects it to produce any fatal
+    /// error.
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to produce its error.
@@ -122,7 +123,7 @@ extension XCTestCase {
     }
     
     /// Executes the `testcase` closure and expects it execute without producing
-    /// a fatal error.
+    /// any fatal errors.
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to finish. Defaults to 2

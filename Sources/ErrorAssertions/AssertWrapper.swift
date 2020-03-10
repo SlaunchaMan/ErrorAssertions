@@ -7,6 +7,18 @@
 
 import Foundation
 
+/// Performs a traditional C-style assert with an `Error`.
+/// - Parameters:
+///   - condition: The condition to test. `condition` is only evaluated in
+///                playgrounds and `-Onone` builds.
+///   - error: The error that represents the assertion failure when `condition`
+///            evaluates to `false`.
+///   - file: The file name to print with the description of `error` if the
+///           assertion fails. The default is the file where
+///           `assert(_:error:file:line:)` is called.
+///   - line: The line number to print along with the description of `error` if
+///           the assertion fails. The default is the line number where
+///           `assert(_:error:file:line:)` is called.
 @inlinable
 public func assert(_ condition: @autoclosure () -> Bool,
                    error: Error,
@@ -15,6 +27,17 @@ public func assert(_ condition: @autoclosure () -> Bool,
     AssertUtilities.assertClosure(condition(), error, file, line)
 }
 
+/// Performs a traditional C-style assert with an optional message.
+/// - Parameters:
+///   - condition: The condition to test. `condition` is only evaluated in
+///                playgrounds and `-Onone` builds.
+///   - message: A string to print if `condition` is evaluated to `false`. The
+///              default is an empty string.
+///   - file: The file name to print with `message` if the assertion fails. The
+///           default is the file where `assert(_:_:file:line:)` is called.
+///   - line: The line number to print along with message if the assertion
+///           fails. The default is the line number where
+///           `assert(_:_:file:line:)` is called.
 @inlinable
 public func assert(_ condition: @autoclosure () -> Bool,
                    _ message: @autoclosure () -> String = String(),
@@ -26,6 +49,15 @@ public func assert(_ condition: @autoclosure () -> Bool,
            line: line)
 }
 
+/// Indicates that an internal sanity check failed.
+/// - Parameters:
+///   - error: The error that represents the assertion failure.
+///   - file: The file name to print with the description of `error`. The
+///           default is the file where
+///           `assertionFailure(error:file:line:)` is called.
+///   - line: The line number to print along with the description of `error`.
+///           The default is the line number where
+///           `assertionFailure(error:file:line:)` is called.
 @inlinable
 public func assertionFailure(error: Error,
                              file: StaticString = #file,
@@ -33,6 +65,14 @@ public func assertionFailure(error: Error,
     AssertUtilities.assertionFailureClosure(error, file, line)
 }
 
+/// Indicates that an internal sanity check failed.
+/// - Parameters:
+///   - message: A string to print in a playground or `-Onone` build. The
+///              default is an empty string.
+///   - file: The file name to print with `message`. The default is the file
+///           where `assertionFailure(_:file:line:)` is called.
+///   - line: The line number to print along with `message`. The default is the
+///           line number where `assertionFailure(_:file:line:)` is called.
 @inlinable
 public func assertionFailure(_ message: @autoclosure () -> String = String(),
                              file: StaticString = #file,
@@ -42,10 +82,14 @@ public func assertionFailure(_ message: @autoclosure () -> String = String(),
                      line: line)
 }
 
+/// A utility type that replaces the internal implementation of assertion
+/// functions.
 public enum AssertUtilities {
     
+    /// A closure that handles an assertion.
     public typealias AssertClosure = (Bool, Error, StaticString, UInt) -> ()
     
+    /// A closure that handles an assertion failure.
     public typealias AssertionFailureClosure =
         (Error, StaticString, UInt) -> ()
     
@@ -77,6 +121,11 @@ public enum AssertUtilities {
                                line: line)
     }
     
+    /// Replaces the internal implementation of `assert(_:error:file:line:)`
+    /// with the given closure. Returns a `RestorationHandler` to execute that
+    /// restores the original implentation.
+    /// - Parameter closure: The closure to execute when
+    ///                      `assert(_:error:file:line:)` is called.
     static public func replaceAssert(
         with closure: @escaping AssertClosure
     ) -> RestorationHandler {
@@ -88,6 +137,11 @@ public enum AssertUtilities {
         _assertClosure = nil
     }
     
+    /// Replaces the internal implementation of
+    /// `assertionFailure(error:file:line:)` with the given closure. Returns a
+    /// `RestorationHandler` to execute that restores the original implentation.
+    /// - Parameter closure: The closure to execute when
+    ///                      `assertionFailure(error:file:line:)` is called.
     static public func replaceAssertionFailure(
         with closure: @escaping AssertionFailureClosure
     ) -> RestorationHandler {

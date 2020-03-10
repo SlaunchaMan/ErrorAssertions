@@ -117,7 +117,7 @@ extension XCTestCase {
             testcase: testcase)
     }
     
-    /// Executes the `testcase` closure and expects it to produce a
+    /// Executes the `testcase` closure and expects it to produce any
     /// precondition failure.
     ///
     /// - Parameters:
@@ -137,7 +137,7 @@ extension XCTestCase {
     }
     
     /// Executes the `testcase` closure and expects it finish without producing
-    /// a precondition failure.
+    /// any precondition failures.
     ///
     /// - Parameters:
     ///   - timeout: How long to wait for `testcase` to finish. Defaults to 2

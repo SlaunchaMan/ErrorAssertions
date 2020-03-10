@@ -230,45 +230,5 @@ final class AssertTests: XCTestCase {
         XCTAssertNil(AssertUtilities._assertClosure)
         XCTAssertNil(AssertUtilities._assertionFailureClosure)
     }
-    
-    static var allTests = [
-        ("testAssertionFailuresSendExpectedErrors",
-         testAssertionFailuresSendExpectedErrors),
         
-        ("testDefaultErrorIsABlankAnonymousError",
-         testDefaultErrorIsABlankAnonymousError),
-        
-        ("testDefaultErrorWithStringIsAnAnonymousError",
-         testDefaultErrorWithStringIsAnAnonymousError),
-        
-        ("testAssertionFailureWithoutCapturingError",
-         testAssertionFailureWithoutCapturingError),
-        
-        ("testAssertionFailureWithMessageWithoutCapturingError",
-         testAssertionFailureWithMessageWithoutCapturingError),
-        
-        ("testExpectingNoAssertionFailure", testExpectingNoAssertionFailure),
-        
-        ("testAssertionsDoNotContinueExecution",
-         testAssertionsDoNotContinueExecution),
-        
-        ("testAssertionFailuresDoNotContinueExecution",
-         testAssertionFailuresDoNotContinueExecution),
-        
-        ("testAssertionsDoContinueExecution",
-         testAssertionsDoContinueExecution),
-        
-        ("testAssertExpectationThreadDies", testAssertExpectationThreadDies),
-        
-        ("testAssertionFailureExpectationThreadDies",
-         testAssertionFailureExpectationThreadDies),
-        
-        ("testNoAssertionFailureExpectationThreadDies",
-         testNoAssertionFailureExpectationThreadDies),
-        
-        ("testAssertionMethodsAreReplacedAfterTestFinishes",
-         testAssertionMethodsAreReplacedAfterTestFinishes),
-        
-    ]
-    
 }

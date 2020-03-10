@@ -238,45 +238,4 @@ final class PreconditionTests: XCTestCase {
         XCTAssertNil(PreconditionUtilities._preconditionFailureClosure)
     }
     
-    static var allTests = [
-        ("testPreconditionFailuresSendExpectedErrors",
-         testPreconditionFailuresSendExpectedErrors),
-        
-        ("testDefaultErrorIsABlankAnonymousError",
-         testDefaultErrorIsABlankAnonymousError),
-        
-        ("testDefaultErrorWithStringIsAnAnonymousError",
-         testDefaultErrorWithStringIsAnAnonymousError),
-        
-        ("testPreconditionFailureWithoutCapturingError",
-         testPreconditionFailureWithoutCapturingError),
-        
-        ("testPreconditionFailureWithMessageWithoutCapturingError",
-         testPreconditionFailureWithMessageWithoutCapturingError),
-        
-        ("testExpectingNoPreconditionFailure",
-         testExpectingNoPreconditionFailure),
-        
-        ("testPreconditionsThatFailDoNotContinueExecution",
-         testPreconditionsThatFailDoNotContinueExecution),
-        
-        ("testPreconditionFailuresDoNotContinueExecution",
-         testPreconditionFailuresDoNotContinueExecution),
-        
-        ("testPreconditionsThatSucceedDoContinueExecution",
-         testPreconditionsThatSucceedDoContinueExecution),
-        
-        ("testPreconditionExpectationThreadDies",
-         testPreconditionExpectationThreadDies),
-        
-        ("testPreconditionFailureExpectationThreadDies",
-         testPreconditionFailureExpectationThreadDies),
-        
-        ("testNoPreconditionFailureExpectationThreadDies",
-         testNoPreconditionFailureExpectationThreadDies),
-        
-        ("testPreconditionMethodsAreReplacedAfterTestFinishes",
-         testPreconditionMethodsAreReplacedAfterTestFinishes)
-    ]
-    
 }

@@ -1,9 +1,8 @@
 import XCTest
 
-import ErrorAssertions
+import ErrorAssertionsTests
 
 var tests = [XCTestCaseEntry]()
-tests += AssertTests.allTests()
-tests += FatalErrorTests.allTests()
-tests += PreconditionTests.allTests()
+tests += ErrorAssertionsTests.__allTests()
+
 XCTMain(tests)

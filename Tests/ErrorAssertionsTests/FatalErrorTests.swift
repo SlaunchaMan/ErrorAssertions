@@ -146,35 +146,4 @@ final class FatalErrorTests: XCTestCase {
         XCTAssertNil(FatalErrorUtilities._fatalErrorClosure)
     }
 
-    static var allTests = [
-        ("testFatalErrorsSendExpectedErrors",
-         testFatalErrorsSendExpectedErrors),
-        
-        ("testDefaultErrorIsABlankAnonymousError",
-         testDefaultErrorIsABlankAnonymousError),
-        
-        ("testDefaultErrorWithStringIsAnAnonymousError",
-         testDefaultErrorWithStringIsAnAnonymousError),
-        
-        ("testFatalErrorWithoutCapturingError",
-         testFatalErrorWithoutCapturingError),
-        
-        ("testFatalErrorWithMessageWithoutCapturingError",
-         testFatalErrorWithMessageWithoutCapturingError),
-        
-        ("testExpectingNoFatalError", testExpectingNoFatalError),
-        
-        ("testFatalErrorsDoNotContinueExecution",
-         testFatalErrorsDoNotContinueExecution),
-        
-        ("testFatalErrorExpectationThreadDies",
-         testFatalErrorExpectationThreadDies),
-        
-        ("testNoFatalErrorExpectationThreadDies",
-         testNoFatalErrorExpectationThreadDies),
-        
-        ("testFatalErrorMethodsAreReplacedAfterTestFinishes",
-         testFatalErrorMethodsAreReplacedAfterTestFinishes)
-    ]
-    
 }

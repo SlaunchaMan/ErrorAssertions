@@ -91,7 +91,7 @@ targets: [
 ### CocoaPods
 
 To use ErrorAssertions with CocoaPods, use the main pod as a dependency in your
-app and the ErrorAssertionExpectations subspec in your tests:
+app and the ErrorAssertionExpectations pod in your tests:
 
 ```ruby
 target 'App' do
@@ -99,6 +99,6 @@ target 'App' do
 end
 
 target 'AppTests' do
-    pod 'ErrorAssertions/ErrorAssertionExpectatoins'
+    pod 'ErrorAssertionExpectatoins'
 end
 ```

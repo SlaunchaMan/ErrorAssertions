@@ -5,11 +5,8 @@
 //  Created by Jeff Kelley on 7/1/19.
 //
 
-import XCTest
-
-#if !COCOAPODS
 import ErrorAssertions
-#endif
+import XCTest
 
 extension XCTestCase {
     

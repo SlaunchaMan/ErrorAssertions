@@ -8,3 +8,4 @@ muter_logs/
 docs/
 fastlane/*_docs.json
 fastlane/report.xml
+.swiftpm

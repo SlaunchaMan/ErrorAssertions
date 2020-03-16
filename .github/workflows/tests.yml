@@ -26,12 +26,18 @@ jobs:
       run: swift test -c debug
 
   macos:
-    name: macOS
+    strategy:
+      matrix:
+        swift-version:
+          - "4"
+          - "4.2"
+          - "5"
+    name: macOS (Swift ${{ matrix.swift-version }})
     runs-on: macos-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Debug Build
-      run: swift build -c debug
+      run: swift build -c debug -Xswiftc -swift-version -Xswiftc ${{ matrix.swift-version }}
     - name: Debug Test
-      run: swift test -c debug
+      run: swift test -c debug -Xswiftc -swift-version -Xswiftc ${{ matrix.swift-version }}

@@ -17,5 +17,10 @@ let package = Package(
                         "ErrorAssertions",
                         "ErrorAssertionExpectations",
             ]),
+    ],
+    swiftLanguageVersions: [
+        .version("4"),
+        .version("4.2"),
+        .version("5")
     ]
 )

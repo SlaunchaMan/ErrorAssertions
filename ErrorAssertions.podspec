@@ -17,7 +17,7 @@ Swift’s Error type instead of a simple String.
   spec.macos.deployment_target = "10.10"
   spec.watchos.deployment_target = "2.0"
   spec.tvos.deployment_target = "9.0"
-  spec.swift_versions = ['5.0', '5.1']
+  spec.swift_versions = ['4', '4.2', '5']
 
   spec.source       = { :git => "https://github.com/SlaunchaMan/ErrorAssertions.git",
                         :tag => "#{spec.version}" }

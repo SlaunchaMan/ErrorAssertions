@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "ErrorAssertions"
-  spec.version      = "0.3.0"
+  spec.version      = "0.4.0"
   spec.summary      = "Versions of Swift assertion functions using  Error types"
 
   spec.description  = <<-DESC

@@ -32,7 +32,7 @@ jobs:
           - "4"
           - "4.2"
           - "5"
-    name: macOS
+    name: macOS (Swift ${{ matrix.swift-version }})
     runs-on: macos-latest
     steps:
     - name: Checkout

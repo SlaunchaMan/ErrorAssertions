@@ -35,7 +35,7 @@ doSomething(completionHandler: { error in
 })
 ```
 
-You can use `Error` types with `fatalError()`, `assert()`, `assertionFialure()`,
+You can use `Error` types with `fatalError()`, `assert()`, `assertionFailure()`,
 `precondition()`, and `preconditionFailure()`.
 
 ## Testing Assertions

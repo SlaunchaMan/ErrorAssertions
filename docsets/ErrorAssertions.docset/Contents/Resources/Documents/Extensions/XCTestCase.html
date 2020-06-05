@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>XCTestCase Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Extension/XCTestCase" class="dashAnchor"></a>
+    <a title="XCTestCase Extension Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">ErrorAssertions 0.4.0 Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SlaunchaMan/ErrorAssertions"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">ErrorAssertions Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        XCTestCase Extension Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/AnonymousError.html">AnonymousError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/AssertUtilities.html">AssertUtilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FatalErrorUtilities.html">FatalErrorUtilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PreconditionUtilities.html">PreconditionUtilities</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/XCTestCase.html">XCTestCase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions6assert__4file4lineySbyXK_SSyXKs12StaticStringVSutF">assert(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions6assert_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">assert(_:error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions16assertionFailure_4file4lineySSyXK_s12StaticStringVSutF">assertionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions16assertionFailure5error4file4lineys0A0_p_s12StaticStringVSutF">assertionFailure(error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOSSyXK_s12StaticStringVSutF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions12precondition__4file4lineySbyXK_SSyXKs12StaticStringVSutF">precondition(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions12precondition_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">precondition(_:error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions19preconditionFailure_4file4lines5NeverOSSyXK_s12StaticStringVSutF">preconditionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:15ErrorAssertions19preconditionFailure5error4file4lines5NeverOs0A0_p_s12StaticStringVSutF">preconditionFailure(error:file:line:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15ErrorAssertions18RestorationHandlera">RestorationHandler</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>XCTestCase</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">XCTestCase</span></code></pre>
+
+                </div>
+              </div>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE06expectD7Failure08expectedC07timeout4file4line8testcaseyx_Sds12StaticStringVSuyyctSQRzs0C0RzlF"></a>
+                    <a name="//apple_ref/swift/Method/expectAssertionFailure(expectedError:timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE06expectD7Failure08expectedC07timeout4file4line8testcaseyx_Sds12StaticStringVSuyyctSQRzs0C0RzlF">expectAssertionFailure(expectedError:<wbr>timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce a specific
+assertion failure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">expectAssertionFailure</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">expectedError</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>expectedError</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>Error</code> you expect <code>testcase</code> to pass to
+           <code>assert()</code> or <code>assertionFailure()</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     Defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE06expectD7Failure15expectedMessage7timeout4file4line8testcaseySS_Sds12StaticStringVSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectAssertionFailure(expectedMessage:timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE06expectD7Failure15expectedMessage7timeout4file4line8testcaseySS_Sds12StaticStringVSuyyctF">expectAssertionFailure(expectedMessage:<wbr>timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce a specific
+assertion failure message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectAssertionFailure</span><span class="p">(</span>
+    <span class="n">expectedMessage</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>String</code> you expect <code>testcase</code> to pass to
+     <code>assert()</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     Defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE06expectD7Failure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectAssertionFailure(timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE06expectD7Failure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF">expectAssertionFailure(timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce any assertion
+failure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectAssertionFailure</span><span class="p">(</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     Defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE08expectNoD7Failure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectNoAssertionFailure(timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE08expectNoD7Failure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF">expectNoAssertionFailure(timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it finish without producing
+any assertion failures.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectNoAssertionFailure</span><span class="p">(</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to finish. Defaults to 2
+     seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE011expectFatalC008expectedC07timeout4file4line8testcaseyx_Sds12StaticStringVSuyyctSQRzs0C0RzlF"></a>
+                    <a name="//apple_ref/swift/Method/expectFatalError(expectedError:timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE011expectFatalC008expectedC07timeout4file4line8testcaseyx_Sds12StaticStringVSuyyctSQRzs0C0RzlF">expectFatalError(expectedError:<wbr>timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce a specific
+fatal error.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">expectFatalError</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">expectedError</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>expectedError</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>Error</code> you expect <code>testcase</code> to pass to
+           <code>fatalError()</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE011expectFatalC015expectedMessage7timeout4file4line8testcaseySS_Sds12StaticStringVSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectFatalError(expectedMessage:timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE011expectFatalC015expectedMessage7timeout4file4line8testcaseySS_Sds12StaticStringVSuyyctF">expectFatalError(expectedMessage:<wbr>timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce a specific
+fatal error message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectFatalError</span><span class="p">(</span>
+    <span class="n">expectedMessage</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>String</code> you expect <code>testcase</code> to pass to
+     <code>fatalError()</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE011expectFatalC07timeout2in4file4line8testcaseySd_s12StaticStringVAKSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectFatalError(timeout:in:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE011expectFatalC07timeout2in4file4line8testcaseySd_s12StaticStringVAKSuyyctF">expectFatalError(timeout:<wbr>in:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce any fatal
+error.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectFatalError</span><span class="p">(</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="k">in</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#function</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE013expectNoFatalC07timeout2in4file4line8testcaseySd_s12StaticStringVAKSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectNoFatalError(timeout:in:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE013expectNoFatalC07timeout2in4file4line8testcaseySd_s12StaticStringVAKSuyyctF">expectNoFatalError(timeout:<wbr>in:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it execute without producing
+any fatal errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectNoFatalError</span><span class="p">(</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="k">in</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#function</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to finish. Defaults to 2
+     seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE25expectPreconditionFailure08expectedC07timeout4file4line8testcaseyx_Sds12StaticStringVSuyyctSQRzs0C0RzlF"></a>
+                    <a name="//apple_ref/swift/Method/expectPreconditionFailure(expectedError:timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE25expectPreconditionFailure08expectedC07timeout4file4line8testcaseyx_Sds12StaticStringVSuyyctSQRzs0C0RzlF">expectPreconditionFailure(expectedError:<wbr>timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce a specific
+precondition failure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">expectPreconditionFailure</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="nv">expectedError</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>expectedError</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>Error</code> you expect <code>testcase</code> to pass to
+           <code>precondition()</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE25expectPreconditionFailure15expectedMessage7timeout4file4line8testcaseySS_Sds12StaticStringVSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectPreconditionFailure(expectedMessage:timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE25expectPreconditionFailure15expectedMessage7timeout4file4line8testcaseySS_Sds12StaticStringVSuyyctF">expectPreconditionFailure(expectedMessage:<wbr>timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce a specific
+precondition failure message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectPreconditionFailure</span><span class="p">(</span>
+    <span class="n">expectedMessage</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>String</code> you expect <code>testcase</code> to pass to
+     <code>precondition()</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE25expectPreconditionFailure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectPreconditionFailure(timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE25expectPreconditionFailure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF">expectPreconditionFailure(timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it to produce any
+precondition failure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectPreconditionFailure</span><span class="p">(</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to produce its error.
+     defaults to 2 seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run that produces the error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So10XCTestCaseC26ErrorAssertionExpectationsE27expectNoPreconditionFailure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF"></a>
+                    <a name="//apple_ref/swift/Method/expectNoPreconditionFailure(timeout:file:line:testcase:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So10XCTestCaseC26ErrorAssertionExpectationsE27expectNoPreconditionFailure7timeout4file4line8testcaseySd_s12StaticStringVSuyyctF">expectNoPreconditionFailure(timeout:<wbr>file:<wbr>line:<wbr>testcase:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Executes the <code>testcase</code> closure and expects it finish without producing
+any precondition failures.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">expectNoPreconditionFailure</span><span class="p">(</span>
+    <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">,</span>
+    <span class="nv">testcase</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How long to wait for <code>testcase</code> to finish. Defaults to 2
+     seconds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The test file. By default, this will be the file from which
+  you’re calling this method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number in <code>file</code> where this is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>testcase</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to run.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/SlaunchaMan/ErrorAssertions" target="_blank" rel="external">Jeff Kelley</a>. All rights reserved. (Last updated: 2020-06-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

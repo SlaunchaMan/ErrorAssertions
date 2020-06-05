@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Functions  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Section/Functions" class="dashAnchor"></a>
+    <a title="Functions  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">ErrorAssertions 0.4.0 Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SlaunchaMan/ErrorAssertions"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">ErrorAssertions Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Functions  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/AnonymousError.html">AnonymousError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/AssertUtilities.html">AssertUtilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/FatalErrorUtilities.html">FatalErrorUtilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PreconditionUtilities.html">PreconditionUtilities</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/XCTestCase.html">XCTestCase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions6assert__4file4lineySbyXK_SSyXKs12StaticStringVSutF">assert(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions6assert_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">assert(_:error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions16assertionFailure_4file4lineySSyXK_s12StaticStringVSutF">assertionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions16assertionFailure5error4file4lineys0A0_p_s12StaticStringVSutF">assertionFailure(error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOSSyXK_s12StaticStringVSutF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions12precondition__4file4lineySbyXK_SSyXKs12StaticStringVSutF">precondition(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions12precondition_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">precondition(_:error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions19preconditionFailure_4file4lines5NeverOSSyXK_s12StaticStringVSutF">preconditionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions19preconditionFailure5error4file4lines5NeverOs0A0_p_s12StaticStringVSutF">preconditionFailure(error:file:line:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:15ErrorAssertions18RestorationHandlera">RestorationHandler</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Functions</h1>
+            <p>The following functions are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions6assert_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/assert(_:error:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions6assert_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">assert(_:<wbr>error:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Performs a traditional C-style assert with an <code>Error</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">assert</span><span class="p">(</span><span class="n">_</span> <span class="nv">condition</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
+                   <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span>
+                   <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                   <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>condition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The condition to test. <code>condition</code> is only evaluated in
+       playgrounds and <code>-Onone</code> builds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The error that represents the assertion failure when <code>condition</code>
+   evaluates to <code>false</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with the description of <code>error</code> if the
+  assertion fails. The default is the file where
+  <code>assert(_:error:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with the description of <code>error</code> if
+  the assertion fails. The default is the line number where
+  <code>assert(_:error:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions6assert__4file4lineySbyXK_SSyXKs12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/assert(_:_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions6assert__4file4lineySbyXK_SSyXKs12StaticStringVSutF">assert(_:<wbr>_:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Performs a traditional C-style assert with an optional message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">assert</span><span class="p">(</span><span class="n">_</span> <span class="nv">condition</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
+                   <span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(),</span>
+                   <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                   <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>condition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The condition to test. <code>condition</code> is only evaluated in
+       playgrounds and <code>-Onone</code> builds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string to print if <code>condition</code> is evaluated to <code>false</code>. The
+     default is an empty string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with <code>message</code> if the assertion fails. The
+  default is the file where <code>assert(_:_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with message if the assertion
+  fails. The default is the line number where
+  <code>assert(_:_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions16assertionFailure5error4file4lineys0A0_p_s12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/assertionFailure(error:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions16assertionFailure5error4file4lineys0A0_p_s12StaticStringVSutF">assertionFailure(error:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates that an internal sanity check failed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">assertionFailure</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span>
+                             <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                             <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The error that represents the assertion failure.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with the description of <code>error</code>. The
+  default is the file where
+  <code>assertionFailure(error:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with the description of <code>error</code>.
+  The default is the line number where
+  <code>assertionFailure(error:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions16assertionFailure_4file4lineySSyXK_s12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/assertionFailure(_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions16assertionFailure_4file4lineySSyXK_s12StaticStringVSutF">assertionFailure(_:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates that an internal sanity check failed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">assertionFailure</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(),</span>
+                             <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                             <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string to print in a playground or <code>-Onone</code> build. The
+     default is an empty string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with <code>message</code>. The default is the file
+  where <code>assertionFailure(_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with <code>message</code>. The default is the
+  line number where <code>assertionFailure(_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/fatalError(_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF">fatalError(_:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unconditionally reports a given error and stops execution.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">fatalError</span><span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span>
+                       <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                       <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The error to report.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with the description of <code>error</code>. The
+  default is the file where <code>fatalError(_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print with the description of <code>error</code>. The
+  default is the line number where <code>fatalError(_:file:line:)</code> is
+  called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions05fatalA0_4file4lines5NeverOSSyXK_s12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/fatalError(_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOSSyXK_s12StaticStringVSutF">fatalError(_:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Unconditionally prints a given message and stops execution.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">fatalError</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(),</span>
+                       <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                       <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The string to print. The default is an empty string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with <code>message</code>. The default is the file
+  where <code><a href="Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF">fatalError(_:file:line:)</a></code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with <code>message</code>. The default is the
+  line number where <code><a href="Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF">fatalError(_:file:line:)</a></code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions12precondition_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/precondition(_:error:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions12precondition_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">precondition(_:<wbr>error:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks a necessary condition for making forward progress.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">precondition</span><span class="p">(</span><span class="n">_</span> <span class="nv">condition</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
+                         <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span>
+                         <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                         <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>condition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The condition to test. <code>condition is not evaluated in
+</code>-Ounchecked` builds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The error that represents the precondition failure when
+   <code>condition</code> evaluates to <code>false</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with the description of <code>error</code> if the
+  precondition fails. The default is the file where 
+  <code>precondition(_:error:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with the description of <code>error</code> if
+  the precondition fails. The default is the line number where
+  <code>precondition(_:error:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions12precondition__4file4lineySbyXK_SSyXKs12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/precondition(_:_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions12precondition__4file4lineySbyXK_SSyXKs12StaticStringVSutF">precondition(_:<wbr>_:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks a necessary condition for making forward progress.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">precondition</span><span class="p">(</span><span class="n">_</span> <span class="nv">condition</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
+                         <span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(),</span>
+                         <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                         <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>condition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The condition to test. <code>condition</code> is not evaluated in
+       <code>-Ounchecked</code> builds.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string to print if <code>condition</code> is evaluated to <code>false</code> in a
+     playground or <code>-Onone</code> build. The default is an empty string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with <code>message</code> if the precondition fails.
+  The default is the file where <code>precondition(_:_:file:line:)</code> is
+  called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with <code>message</code> if the precondition
+  fails. The default is the line number where
+  <code>precondition(_:_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions19preconditionFailure5error4file4lines5NeverOs0A0_p_s12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/preconditionFailure(error:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions19preconditionFailure5error4file4lines5NeverOs0A0_p_s12StaticStringVSutF">preconditionFailure(error:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates that a precondition was violated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">preconditionFailure</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span>
+                                <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                                <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The error that represents the precondition failure.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with the description of <code>error</code>. The
+  default is the file where <code>preconditionFailure(error:file:line:)</code>
+  is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with the description of <code>error</code>.
+  The default is the line number where
+  <code>preconditionFailure(error:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15ErrorAssertions19preconditionFailure_4file4lines5NeverOSSyXK_s12StaticStringVSutF"></a>
+                    <a name="//apple_ref/swift/Function/preconditionFailure(_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15ErrorAssertions19preconditionFailure_4file4lines5NeverOSSyXK_s12StaticStringVSutF">preconditionFailure(_:<wbr>file:<wbr>line:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates that a precondition was violated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">preconditionFailure</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(),</span>
+                                <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span>
+                                <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string to print in a playground or <code>-Onone</code> build. The
+     default is an empty string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file name to print with <code>message</code>. The default is the file
+  where <code>preconditionFailure(_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>line</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The line number to print along with <code>message</code>. The default is the
+  line number where <code>preconditionFailure(_:file:line:)</code> is called.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/SlaunchaMan/ErrorAssertions" target="_blank" rel="external">Jeff Kelley</a>. All rights reserved. (Last updated: 2020-06-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

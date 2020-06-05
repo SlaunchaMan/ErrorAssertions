@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ErrorAssertions  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="ErrorAssertions  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">ErrorAssertions 0.4.0 Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/SlaunchaMan/ErrorAssertions"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">ErrorAssertions Reference</a>
+        <img id="carat" src="img/carat.png" />
+        ErrorAssertions  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/AnonymousError.html">AnonymousError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/AssertUtilities.html">AssertUtilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/FatalErrorUtilities.html">FatalErrorUtilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/PreconditionUtilities.html">PreconditionUtilities</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/XCTestCase.html">XCTestCase</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions6assert__4file4lineySbyXK_SSyXKs12StaticStringVSutF">assert(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions6assert_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">assert(_:error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions16assertionFailure_4file4lineySSyXK_s12StaticStringVSutF">assertionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions16assertionFailure5error4file4lineys0A0_p_s12StaticStringVSutF">assertionFailure(error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOSSyXK_s12StaticStringVSutF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF">fatalError(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions12precondition__4file4lineySbyXK_SSyXKs12StaticStringVSutF">precondition(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions12precondition_5error4file4lineySbyXK_s0A0_ps12StaticStringVSutF">precondition(_:error:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions19preconditionFailure_4file4lines5NeverOSSyXK_s12StaticStringVSutF">preconditionFailure(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:15ErrorAssertions19preconditionFailure5error4file4lines5NeverOs0A0_p_s12StaticStringVSutF">preconditionFailure(error:file:line:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:15ErrorAssertions18RestorationHandlera">RestorationHandler</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='errorassertions' class='heading'>ErrorAssertions</h1>
+
+<p><a href="https://github.com/SlaunchaMan/ErrorAssertions/actions?query=workflow%3Atests"><img src="https://github.com/SlaunchaMan/ErrorAssertions/workflows/tests/badge.svg" alt="tests"></a>
+<a href="https://SlaunchaMan.github.io/ErrorAssertions"><img src="https://SlaunchaMan.github.io/ErrorAssertions/badge.svg" alt="Documentation"></a>
+<a href="https://cocoapods.org/pods/ErrorAssertions"><img src="https://img.shields.io/cocoapods/v/ErrorAssertions.svg?style=flat" alt="Version"></a>
+<a href="https://swift.org/package-manager"><img src="https://img.shields.io/badge/SPM-compatible-orange.svg" alt="Swift Package Manager"></a></p>
+
+<p>Wrappers for Swift assertions that take <code>Error</code> instances instead of <code>String</code>s, 
+and a suite of test functions to test these assertions.</p>
+<h2 id='getting-started' class='heading'>Getting Started</h2>
+
+<p>To use ErrorAssertions, simply import it at the top of your Swift source file:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ErrorAssertions</span>
+</code></pre>
+
+<p>Just by doing this, since the Swift compiler will prefer imported modules to the
+main Swift module, you’ll get the ErrorAssertion versions of functions like
+<code><a href="Functions.html#/s:15ErrorAssertions05fatalA0_4file4lines5NeverOs0A0_p_s12StaticStringVSutF">fatalError(_:file:line:)</a></code>.</p>
+<h3 id='using-code-error-code-types' class='heading'>Using <code>Error</code> Types</h3>
+
+<p>To use an <code>Error</code> instead of a <code>String</code> when calling an assertion method, use
+the error version:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ErrorAssertions</span>
+
+<span class="nf">doSomething</span><span class="p">(</span><span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+        <span class="nf">fatalError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+
+<p>You can use <code>Error</code> types with <code>fatalError()</code>, <code>assert()</code>, <code>assertionFailure()</code>,
+<code>precondition()</code>, and <code>preconditionFailure()</code>.</p>
+<h2 id='testing-assertions' class='heading'>Testing Assertions</h2>
+
+<p>In your tests, import the <code>ErrorAssertionExpectations</code> module to test assertions
+made in your app (as long as you’ve imported <code>ErrorAssertions</code>). In your test
+cases, use the expectation methods:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">testThatAnErrorHappens</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">expectFatalError</span> <span class="p">{</span>
+        <span class="nf">doAThingThatProducesAFatalError</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>There are also versions that take an <code>Error</code> or <code>String</code> and validate that the
+produced error is the one you’re expecting:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">testThatASpecificErrorHappens</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">expectFatalError</span><span class="p">(</span><span class="nv">expectedError</span><span class="p">:</span> <span class="kt">URLError</span><span class="o">.</span><span class="n">badURL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">loadURL</span><span class="p">(</span><span class="s">"thisisnotaurl"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Swift Package Manager is the preferred way to install ErrorAssertions. Add the
+repository as a dependency:</p>
+<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/SlaunchaMan/ErrorAssertions.git"</span><span class="p">,</span>
+             <span class="nv">from</span><span class="p">:</span> <span class="s">"0.2.0"</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre>
+
+<p>In your targets, add <code>ErrorAssertions</code> as a dependency of your main target and,
+if you’re using the test support, add <code>ErrorAssertionExpectations</code> to the test
+target:</p>
+<pre class="highlight swift"><code><span class="nv">targets</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"App"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"ErrorAssertions"</span><span class="p">)]</span>
+    <span class="o">.</span><span class="nf">testTarget</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"AppTests"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"ErrorAssertionExpectations"</span><span class="p">])</span>
+<span class="p">]</span>
+</code></pre>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
+
+<p>To use ErrorAssertions with CocoaPods, use the main pod as a dependency in your
+app and the ErrorAssertionExpectations pod in your tests:</p>
+<pre class="highlight ruby"><code><span class="n">target</span> <span class="s1">'App'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'ErrorAssertions'</span>
+<span class="k">end</span>
+
+<span class="n">target</span> <span class="s1">'AppTests'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'ErrorAssertionExpectatoins'</span>
+<span class="k">end</span>
+</code></pre>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/SlaunchaMan/ErrorAssertions" target="_blank" rel="external">Jeff Kelley</a>. All rights reserved. (Last updated: 2020-06-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

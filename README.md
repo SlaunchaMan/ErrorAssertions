@@ -99,6 +99,6 @@ target 'App' do
 end
 
 target 'AppTests' do
-    pod 'ErrorAssertionExpectatoins'
+    pod 'ErrorAssertionExpectations'
 end
 ```
